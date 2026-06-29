@@ -9,8 +9,7 @@
 		"check": "biome check src",
 		"check:fix": "biome check --write src",
 		"preview": "vite preview",
-		"prepare": "husky || true",
-		"build:css": "npx @tailwindcss/cli -i ./src/index.css -o public/output.css"
+		"prepare": "husky || true"
 	},
 	"dependencies": {
 		"@tailwindcss/cli": "^4.3.1",
