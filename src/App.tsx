@@ -1,13 +1,16 @@
-import { Route, Routes } from "react-router-dom";
-import Favorite from "./pages/Favorite";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Recipe from "./pages/Recipe";
 import RecipeLive from "./pages/RecipeLive";
+import Favorite from "./pages/Favorite";
 import ThemePreview from "./pages/ThemePreview";
+import Navbar from "./components/NavBar";
 
 function App() {
 	return (
 		<>
+			<Navbar />
+
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/recipe/:id" element={<Recipe />} />

@@ -18,13 +18,9 @@
 	--color-text-muted: #6b6b6b;
 }
 
-/* biome-ignore lint/correctness/noUnknownProperty */
 @plugin "daisyui/theme" {
-	/* biome-ignore lint/correctness/noUnknownProperty */
 	name: "mealmaker";
-	/* biome-ignore lint/correctness/noUnknownProperty */
 	default: true;
-	/* biome-ignore lint/correctness/noUnknownProperty */
 	prefersdark: false;
 	color-scheme: light;
 
@@ -79,12 +75,4 @@
 	h6 {
 		font-family: var(--font-heading);
 	}
-}
-
-@utility font-heading {
-	font-family: var(--font-heading);
-}
-
-@utility font-body {
-	font-family: var(--font-body);
 }
