@@ -1,5 +1,13 @@
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+
 function Home() {
-  return <h1>Hello from Home</h1>;
+	return (
+		<>
+			<Header />
+			<Hero />
+		</>
+	);
 }
 
 export default Home;
