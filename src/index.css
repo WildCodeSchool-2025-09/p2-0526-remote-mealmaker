@@ -57,6 +57,8 @@
 	--color-info: var(--color-sky);
 	--color-info-content: #1a3c40;
 
+	--color-muted: var(--color-text-muted);
+
 	--radius-selector: 0.5rem;
 	--radius-field: 0.75rem;
 	--radius-box: 1rem;

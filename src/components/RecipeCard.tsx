@@ -2,7 +2,7 @@ import { Heart, Leaf, Star, TimerIcon } from "lucide-react";
 
 function RecipeCard() {
 	return (
-		<section className=" flex m-4 ">
+		<section className=" flex mt-4 ">
 			<img
 				className="w-6/12 rounded-l-box border-primary"
 				src="./InspecteurGuidget.png"
@@ -14,12 +14,12 @@ function RecipeCard() {
 					Nom du plat sur deux lignes
 				</h3>
 				<div className="w-full flex justify-around py-4">
-					<Leaf color="#7A9E7E" />
-					<Star color="gold" />
+					<Leaf className="text-success" />
+					<Star className="text-amber-300" />
 				</div>
 				<div className="flex justify-around py-8">
-					<TimerIcon />
-					<p> X min</p>
+					<TimerIcon className="text-text-muted" />
+					<p className="text-text-muted"> X min</p>
 				</div>
 			</article>
 		</section>

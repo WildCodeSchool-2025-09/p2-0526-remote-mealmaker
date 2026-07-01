@@ -2,7 +2,7 @@ import { Menu, Search } from "lucide-react";
 
 function SearchBar() {
 	return (
-		<section className="w-full flex justify-between items-center gap-2 mt-4 px-4">
+		<section className="w-full flex justify-between items-center gap-2 mt-4 ">
 			<label className="input w-full bg-surface border border-solid border-primary">
 				<Search />
 				<input
