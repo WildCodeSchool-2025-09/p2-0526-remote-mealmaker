@@ -12,7 +12,7 @@ function SearchBar() {
 					className="input"
 				/>
 			</label>
-			<Menu className="mr-2" />
+			<Menu className="btn mr-2" />
 		</section>
 	);
 }
