@@ -18,9 +18,13 @@
 	--color-text-muted: #6b6b6b;
 }
 
+/* biome-ignore lint/correctness/noUnknownProperty */
 @plugin "daisyui/theme" {
+	/* biome-ignore lint/correctness/noUnknownProperty */
 	name: "mealmaker";
+	/* biome-ignore lint/correctness/noUnknownProperty */
 	default: true;
+	/* biome-ignore lint/correctness/noUnknownProperty */
 	prefersdark: false;
 	color-scheme: light;
 
@@ -53,6 +57,8 @@
 	--color-info: var(--color-sky);
 	--color-info-content: #1a3c40;
 
+	--color-muted: var(--color-text-muted);
+
 	--radius-selector: 0.5rem;
 	--radius-field: 0.75rem;
 	--radius-box: 1rem;
@@ -75,4 +81,12 @@
 	h6 {
 		font-family: var(--font-heading);
 	}
+}
+
+@utility font-heading {
+	font-family: var(--font-heading);
+}
+
+@utility font-body {
+	font-family: var(--font-body);
 }

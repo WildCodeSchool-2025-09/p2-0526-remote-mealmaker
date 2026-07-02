@@ -1,0 +1,498 @@
+{
+    "id": 42,
+    "image": "https://img.spoonacular.com/recipes/42-556x370.jpg",
+    "imageType": "jpg",
+    "title": "Grilled Mozzarella Sandwich With Anchovy-olive Tapenade",
+    "readyInMinutes": 45,
+    "servings": 1,
+    "sourceUrl": "http://www.biggirlssmallkitchen.com/2012/07/grilled-mozzarella-sandwich-with-anchovy-olive-tapenade.html",
+    "vegetarian": false,
+    "vegan": false,
+    "glutenFree": false,
+    "dairyFree": false,
+    "veryHealthy": false,
+    "cheap": false,
+    "veryPopular": false,
+    "sustainable": false,
+    "lowFodmap": false,
+    "weightWatcherSmartPoints": 26,
+    "gaps": "no",
+    "preparationMinutes": null,
+    "cookingMinutes": null,
+    "aggregateLikes": 18,
+    "healthScore": 9,
+    "creditsText": "Big Girls Small Kitchen",
+    "license": null,
+    "sourceName": "Big Girls Small Kitchen",
+    "pricePerServing": 237.11,
+    "extendedIngredients": [
+        {
+            "id": 15001,
+            "aisle": "Seafood",
+            "image": "anchovies.jpg",
+            "consistency": "SOLID",
+            "name": "anchovy",
+            "nameClean": "anchovy",
+            "original": "1 anchovy",
+            "originalName": "anchovy",
+            "amount": 1,
+            "unit": "",
+            "meta": [],
+            "measures": {
+                "us": {
+                    "amount": 1,
+                    "unitShort": "",
+                    "unitLong": ""
+                },
+                "metric": {
+                    "amount": 1,
+                    "unitShort": "",
+                    "unitLong": ""
+                }
+            }
+        },
+        {
+            "id": 18064,
+            "aisle": "Bakery/Bread",
+            "image": "white-bread.jpg",
+            "consistency": "SOLID",
+            "name": "bread",
+            "nameClean": "bread",
+            "original": "2 slices good bread, preferably something sourdough-y",
+            "originalName": "good bread, preferably something sourdough-y",
+            "amount": 2,
+            "unit": "slices",
+            "meta": [
+                "good"
+            ],
+            "measures": {
+                "us": {
+                    "amount": 2,
+                    "unitShort": "slice",
+                    "unitLong": "slices"
+                },
+                "metric": {
+                    "amount": 2,
+                    "unitShort": "slice",
+                    "unitLong": "slices"
+                }
+            }
+        },
+        {
+            "id": 1001,
+            "aisle": "Milk, Eggs, Other Dairy",
+            "image": "butter-sliced.jpg",
+            "consistency": "SOLID",
+            "name": "butter",
+            "nameClean": "butter",
+            "original": "2 Tbsps butter",
+            "originalName": "butter",
+            "amount": 2,
+            "unit": "Tbsps",
+            "meta": [],
+            "measures": {
+                "us": {
+                    "amount": 2,
+                    "unitShort": "Tbsps",
+                    "unitLong": "Tbsps"
+                },
+                "metric": {
+                    "amount": 2,
+                    "unitShort": "Tbsps",
+                    "unitLong": "Tbsps"
+                }
+            }
+        },
+        {
+            "id": 1021026,
+            "aisle": "Cheese",
+            "image": "mozzarella.png",
+            "consistency": "SOLID",
+            "name": "mozzarella",
+            "nameClean": "mozzarella",
+            "original": "3 thick slices fresh mozzarella",
+            "originalName": "thick slices fresh mozzarella",
+            "amount": 3,
+            "unit": "slices",
+            "meta": [
+                "fresh",
+                "thick"
+            ],
+            "measures": {
+                "us": {
+                    "amount": 3,
+                    "unitShort": "slice",
+                    "unitLong": "slices"
+                },
+                "metric": {
+                    "amount": 3,
+                    "unitShort": "slice",
+                    "unitLong": "slices"
+                }
+            }
+        },
+        {
+            "id": 10211215,
+            "aisle": "Produce",
+            "image": "garlic.jpg",
+            "consistency": "SOLID",
+            "name": "garlic clove",
+            "nameClean": "garlic clove",
+            "original": "1/2 small garlic clove",
+            "originalName": "garlic clove",
+            "amount": 0.5,
+            "unit": "small",
+            "meta": [],
+            "measures": {
+                "us": {
+                    "amount": 0.5,
+                    "unitShort": "small",
+                    "unitLong": "smalls"
+                },
+                "metric": {
+                    "amount": 0.5,
+                    "unitShort": "small",
+                    "unitLong": "smalls"
+                }
+            }
+        },
+        {
+            "id": 1082047,
+            "aisle": "Spices and Seasonings",
+            "image": "salt.jpg",
+            "consistency": "SOLID",
+            "name": "kosher salt",
+            "nameClean": "kosher salt",
+            "original": "Pinch of kosher salt",
+            "originalName": "Pinch of kosher salt",
+            "amount": 1,
+            "unit": "pinch",
+            "meta": [],
+            "measures": {
+                "us": {
+                    "amount": 1,
+                    "unitShort": "pinch",
+                    "unitLong": "pinch"
+                },
+                "metric": {
+                    "amount": 1,
+                    "unitShort": "pinch",
+                    "unitLong": "pinch"
+                }
+            }
+        },
+        {
+            "id": 9152,
+            "aisle": "Produce",
+            "image": "lemon-juice.jpg",
+            "consistency": "LIQUID",
+            "name": "lemon juice",
+            "nameClean": "lemon juice",
+            "original": "1/2 tsp lemon juice",
+            "originalName": "lemon juice",
+            "amount": 0.5,
+            "unit": "tsp",
+            "meta": [],
+            "measures": {
+                "us": {
+                    "amount": 0.5,
+                    "unitShort": "tsps",
+                    "unitLong": "teaspoons"
+                },
+                "metric": {
+                    "amount": 0.5,
+                    "unitShort": "tsps",
+                    "unitLong": "teaspoons"
+                }
+            }
+        },
+        {
+            "id": 4053,
+            "aisle": "Oil, Vinegar, Salad Dressing",
+            "image": "olive-oil.jpg",
+            "consistency": "LIQUID",
+            "name": "olive oil",
+            "nameClean": "olive oil",
+            "original": "1/2 tsp olive oil",
+            "originalName": "olive oil",
+            "amount": 0.5,
+            "unit": "tsp",
+            "meta": [],
+            "measures": {
+                "us": {
+                    "amount": 0.5,
+                    "unitShort": "tsps",
+                    "unitLong": "teaspoons"
+                },
+                "metric": {
+                    "amount": 0.5,
+                    "unitShort": "tsps",
+                    "unitLong": "teaspoons"
+                }
+            }
+        },
+        {
+            "id": 9195,
+            "aisle": "Canned and Jarred",
+            "image": "olives-mixed.jpg",
+            "consistency": "SOLID",
+            "name": "olives - half niçoise and half meaty/wrinkled olives",
+            "nameClean": "olives - half niçoise and half meaty/wrinkled olives",
+            "original": "1/3 cup olives – about half niçoise and half meaty/wrinkled black olives, like Nyon, pitted",
+            "originalName": "olives – about half niçoise and half meaty/wrinkled black olives, like Nyon, pitted",
+            "amount": 0.33333334,
+            "unit": "cup",
+            "meta": [
+                "black",
+                "pitted"
+            ],
+            "measures": {
+                "us": {
+                    "amount": 0.33333334,
+                    "unitShort": "cups",
+                    "unitLong": "cups"
+                },
+                "metric": {
+                    "amount": 45,
+                    "unitShort": "ml",
+                    "unitLong": "milliliters"
+                }
+            }
+        },
+        {
+            "id": 2027,
+            "aisle": "Produce",
+            "image": "oregano.jpg",
+            "consistency": "SOLID",
+            "name": "sprig's worth of oregano leaves",
+            "nameClean": "sprig's worth of oregano leaves",
+            "original": "1 sprig's worth of fresh oregano leaves",
+            "originalName": "sprig's worth of fresh oregano leaves",
+            "amount": 1,
+            "unit": "",
+            "meta": [
+                "fresh"
+            ],
+            "measures": {
+                "us": {
+                    "amount": 1,
+                    "unitShort": "",
+                    "unitLong": ""
+                },
+                "metric": {
+                    "amount": 1,
+                    "unitShort": "",
+                    "unitLong": ""
+                }
+            }
+        }
+    ],
+    "summary": "Grilled Mozzarella Sandwich With Anchovy-olive Tapenade takes around <b>45 minutes</b> from beginning to end. This main course has <b>710 calories</b>, <b>27g of protein</b>, and <b>54g of fat</b> per serving. This recipe serves 1 and costs $2.37 per serving. Head to the store and pick up anchovy, anchovy, sprig's worth of oregano leaves, and a few other things to make it today. 18 people were glad they tried this recipe. It can be enjoyed any time, but it is especially good for <b>The Fourth Of July</b>. It is a good option if you're following a <b>pescatarian</b> diet. It is brought to you by Big Girls Small Kitchen. Taking all factors into account, this recipe <b>earns a spoonacular score of 0%</b>, which is improvable. Users who liked this recipe also liked <a href=\"https://spoonacular.com/recipes/roasted-tomato-crostini-with-olive-tapenade-658682\">Roasted Tomato Crostini with Olive Tapenade</a>, <a href=\"https://spoonacular.com/recipes/stuffed-salmon-with-tomato-olive-tapenade-662087\">Stuffed Salmon With Tomato-Olive Tapenade</a>, and <a href=\"https://spoonacular.com/recipes/garlic-oregano-olive-tapenade-1095689\">Garlic Oregano Olive Tapenade</a>.",
+    "cuisines": [],
+    "dishTypes": [
+        "lunch",
+        "main course",
+        "main dish",
+        "dinner"
+    ],
+    "diets": [
+        "pescatarian"
+    ],
+    "occasions": [
+        "father's day",
+        "4th of july",
+        "summer"
+    ],
+    "instructions": "Mince the garlic. Add the salt and keep mincing until the garlic forms a paste. Place the olives and anchovy on your cutting board and coarsely chop them all together until fine but not completely paste-like. Transfer to a small bowl and add the lemon juice and olive oil.On one side of the bread, place the mozzarella. Sprinkle with oregano. On the other, mound most the tapenadethe amount depends on the size of your bread and your appetite for olives. Melt half the butter in a frying pan over medium-low heat. Place the sandwich in the pan with a weight on top for best results. Cook for 5-6 minutes, until the bread is golden and the cheese starts to melt. Lift the sandwich up, add the rest of the butter, flip the sandwich, and cook about 5 minutes on the second side.Cut in half and serve.",
+    "analyzedInstructions": [
+        {
+            "name": "",
+            "steps": [
+                {
+                    "number": 1,
+                    "step": "Mince the garlic.",
+                    "ingredients": [
+                        {
+                            "id": 11215,
+                            "name": "garlic",
+                            "localizedName": "garlic",
+                            "image": "garlic.png"
+                        },
+                        {
+                            "id": 0,
+                            "name": "ground meat",
+                            "localizedName": "ground meat",
+                            "image": "fresh-ground-beef.jpg"
+                        }
+                    ],
+                    "equipment": []
+                },
+                {
+                    "number": 2,
+                    "step": "Add the salt and keep mincing until the garlic forms a paste.",
+                    "ingredients": [
+                        {
+                            "id": 11215,
+                            "name": "garlic",
+                            "localizedName": "garlic",
+                            "image": "garlic.png"
+                        },
+                        {
+                            "id": 2047,
+                            "name": "salt",
+                            "localizedName": "salt",
+                            "image": "salt.jpg"
+                        }
+                    ],
+                    "equipment": []
+                },
+                {
+                    "number": 3,
+                    "step": "Place the olives and anchovy on your cutting board and coarsely chop them all together until fine but not completely paste-like.",
+                    "ingredients": [
+                        {
+                            "id": 15001,
+                            "name": "anchovies",
+                            "localizedName": "anchovies",
+                            "image": "anchovies.jpg"
+                        },
+                        {
+                            "id": 9195,
+                            "name": "olives",
+                            "localizedName": "olives",
+                            "image": "olives-mixed.jpg"
+                        }
+                    ],
+                    "equipment": [
+                        {
+                            "id": 404716,
+                            "name": "cutting board",
+                            "localizedName": "cutting board",
+                            "image": "https://spoonacular.com/cdn/equipment_100x100/cutting-board.jpg"
+                        }
+                    ]
+                },
+                {
+                    "number": 4,
+                    "step": "Transfer to a small bowl and add the lemon juice and olive oil.On one side of the bread, place the mozzarella.",
+                    "ingredients": [
+                        {
+                            "id": 9152,
+                            "name": "lemon juice",
+                            "localizedName": "lemon juice",
+                            "image": "lemon-juice.jpg"
+                        },
+                        {
+                            "id": 1026,
+                            "name": "mozzarella",
+                            "localizedName": "mozzarella",
+                            "image": "mozzarella.png"
+                        },
+                        {
+                            "id": 4053,
+                            "name": "olive oil",
+                            "localizedName": "olive oil",
+                            "image": "olive-oil.jpg"
+                        },
+                        {
+                            "id": 18064,
+                            "name": "bread",
+                            "localizedName": "bread",
+                            "image": "white-bread.jpg"
+                        }
+                    ],
+                    "equipment": [
+                        {
+                            "id": 404783,
+                            "name": "bowl",
+                            "localizedName": "bowl",
+                            "image": "https://spoonacular.com/cdn/equipment_100x100/bowl.jpg"
+                        }
+                    ]
+                },
+                {
+                    "number": 5,
+                    "step": "Sprinkle with oregano. On the other, mound most the tapenadethe amount depends on the size of your bread and your appetite for olives. Melt half the butter in a frying pan over medium-low heat.",
+                    "ingredients": [
+                        {
+                            "id": 2027,
+                            "name": "oregano",
+                            "localizedName": "oregano",
+                            "image": "oregano.jpg"
+                        },
+                        {
+                            "id": 1001,
+                            "name": "butter",
+                            "localizedName": "butter",
+                            "image": "butter-sliced.jpg"
+                        },
+                        {
+                            "id": 9195,
+                            "name": "olives",
+                            "localizedName": "olives",
+                            "image": "olives-mixed.jpg"
+                        },
+                        {
+                            "id": 18064,
+                            "name": "bread",
+                            "localizedName": "bread",
+                            "image": "white-bread.jpg"
+                        }
+                    ],
+                    "equipment": [
+                        {
+                            "id": 404645,
+                            "name": "frying pan",
+                            "localizedName": "frying pan",
+                            "image": "https://spoonacular.com/cdn/equipment_100x100/pan.png"
+                        }
+                    ]
+                },
+                {
+                    "number": 6,
+                    "step": "Place the sandwich in the pan with a weight on top for best results. Cook for 5-6 minutes, until the bread is golden and the cheese starts to melt. Lift the sandwich up, add the rest of the butter, flip the sandwich, and cook about 5 minutes on the second side.",
+                    "ingredients": [
+                        {
+                            "id": 1001,
+                            "name": "butter",
+                            "localizedName": "butter",
+                            "image": "butter-sliced.jpg"
+                        },
+                        {
+                            "id": 1041009,
+                            "name": "cheese",
+                            "localizedName": "cheese",
+                            "image": "cheddar-cheese.png"
+                        },
+                        {
+                            "id": 18064,
+                            "name": "bread",
+                            "localizedName": "bread",
+                            "image": "white-bread.jpg"
+                        }
+                    ],
+                    "equipment": [
+                        {
+                            "id": 404645,
+                            "name": "frying pan",
+                            "localizedName": "frying pan",
+                            "image": "https://spoonacular.com/cdn/equipment_100x100/pan.png"
+                        }
+                    ],
+                    "length": {
+                        "number": 11,
+                        "unit": "minutes"
+                    }
+                },
+                {
+                    "number": 7,
+                    "step": "Cut in half and serve.",
+                    "ingredients": [],
+                    "equipment": []
+                }
+            ]
+        }
+    ],
+    "language": "en",
+    "spoonacularScore": 20.884510040283203
+}
