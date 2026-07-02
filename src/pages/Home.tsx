@@ -1,4 +1,3 @@
-import { Heart, House, Search } from "lucide-react";
 import GetRecipes from "../components/GetRecipes";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
