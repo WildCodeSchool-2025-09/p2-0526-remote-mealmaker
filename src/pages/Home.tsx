@@ -1,4 +1,4 @@
-import GetRecipes from "../components/GetRecipes";
+import GetRecipes from "../components/RecipesByIngredients";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import IngredientsList from "../components/IngredientsList";
