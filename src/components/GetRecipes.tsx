@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RecipeCard from "./RecipeCard";
 
 function GetRecipes({ selectedIngredients }) {
 	console.info(selectedIngredients);
@@ -34,7 +35,7 @@ function GetRecipes({ selectedIngredients }) {
 			</button>
 
 			{recipeByIngredients.map((recipe) => (
-				<p key={recipe.id}>{recipe.id}</p>
+				<RecipeCard key={recipe.id} recipe={recipe} />
 			))}
 		</>
 	);
