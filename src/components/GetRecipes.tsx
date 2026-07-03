@@ -7,7 +7,9 @@ function GetRecipes({ selectedIngredients }) {
 	function fetchRecipeByIngredients(selectedIngredients: string[]) {
 		const myApiKey = import.meta.env.VITE_API_URL;
 
-		const ingredients = selectedIngredients.join(",");
+		const ingredients = selectedIngredients
+			.map((ingredient) => ingredient.name)
+			.join(",");
 
 		fetch(
 			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=${myApiKey}`,

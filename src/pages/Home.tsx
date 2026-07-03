@@ -33,7 +33,7 @@ function Home() {
 					ingredients={selectedIngredients}
 					onRemoveIngredient={removeIngredient}
 				/>
-				<GetRecipes ingredients={selectedIngredients} />
+				<GetRecipes selectedIngredients={selectedIngredients} />
 			</section>
 			<section className="p-8">
 				<article>
