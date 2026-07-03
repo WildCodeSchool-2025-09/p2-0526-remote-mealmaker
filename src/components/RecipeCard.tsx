@@ -26,13 +26,15 @@ function RecipeCard({ recipe }: RecipeCardProps) {
 	// 		});
 	// }
 	return (
-		<section className=" mt-4">
+		<section className=" mt-20 h-64">
 			<NavLink to={`/recipe/${recipe.id}`} className="flex">
-				<img
-					className="w-6/12 rounded-l-box border-primary"
-					src={recipe.image}
-					alt=""
-				/>
+				<div className="w-6/12 overflow-hidden ">
+					<img
+						className="aspect-square w-full h-full object-cover rounded-l-box border-primary"
+						src={recipe.image}
+						alt=""
+					/>
+				</div>
 				<article className="w-6/12 flex flex-col p-4 border rounded-r-box bg-surface border-primary">
 					<Heart className=" self-end m-4" />
 					<h3 className="pb-4 font-bold text-2xl ">{recipe.title}</h3>
