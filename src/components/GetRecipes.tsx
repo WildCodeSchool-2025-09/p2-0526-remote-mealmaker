@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-
-
-function RecipesByIngredients() {
+function GetRecipes({ selectedIngredients }) {
+	console.info(selectedIngredients);
 	const [recipeByIngredients, setRecipeByIngredients] = useState([]);
 
 	function fetchRecipeByIngredients(selectedIngredients: string[]) {
@@ -27,9 +26,7 @@ function RecipesByIngredients() {
 			<button
 				type="button"
 				className="btn btn-block btn-primary py-8 text-xl"
-				onClick={() =>
-					fetchRecipeByIngredients(["anchovy", "mozzarella", "garlic clove"])
-				}
+				onClick={() => fetchRecipeByIngredients(selectedIngredients)}
 			>
 				Rechercher la recette !
 			</button>
@@ -41,4 +38,4 @@ function RecipesByIngredients() {
 	);
 }
 
-export default RecipesByIngredients;
+export default GetRecipes;
