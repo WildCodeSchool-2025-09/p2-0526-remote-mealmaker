@@ -1,5 +1,6 @@
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
+import TestFilterMenu from "./TestFilterMenu";
 
 const commonIngredients = [
 	{
@@ -89,7 +90,7 @@ function SearchBar({ onAddIngredient }) {
 
 	return (
 		<section className="w-full flex flex-col gap-1 mt-4">
-			<div className="w-full flex justify-between items-center gap-2">
+			<div onClick={(e) => e.stopPropagation()} className="w-full flex justify-between items-center gap-2">
 				<label className="input w-full bg-surface border border-solid border-primary">
 					<Search />
 					<input
@@ -102,7 +103,7 @@ function SearchBar({ onAddIngredient }) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				<Menu className="btn mr-2" />
+				<TestFilterMenu />
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 
