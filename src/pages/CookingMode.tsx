@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { ChefHat } from "lucide-react";
+import { useParams } from "react-router";
 import Navbar from "../components/NavBar";
+import { Link } from "react-router-dom";
+import testRecipe from "../recipes.model.json";
 
 type RecipeIngredient = {
 	id: number;
@@ -25,6 +27,7 @@ function CookingMode() {
 	const { id } = useParams();
 	const [recipe, setRecipe] = useState<CookingRecipe>();
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
+	const [recipeCompleted, setRecipeCompleted] = useState(false);
 
 	useEffect(() => {
 		const myApiKey = import.meta.env.VITE_API_URL;
@@ -45,6 +48,28 @@ function CookingMode() {
 	if (steps.length === 0) {
 		return <p>Le mode cuisine n'est pas disponible pour cette recette.</p>;
 	}
+
+	if (recipeCompleted) {
+		return (
+			<section className="min-h-screen flex flex-col items-center justify-center gap-6 p-8 text-center">
+				<img
+					src={recipe.image}
+					alt={recipe.title}
+					className="w-48 h-48 rounded-2xl object-cover"
+				/>
+				<div>
+					<h1 className="text-2xl font-heading font-bold">Bon appétit !</h1>
+					<p className="text-lg">Tu as terminé la recette</p>
+				</div>
+				<Link to={`/recipe/${id}`} className="btn btn-primary btn-xl w-full">
+					Revenir à la recette
+				</Link>
+				<Link to="/" className="btn btn-outline btn-primary btn-xl w-full">
+					Retour à l'accueil
+				</Link>
+			</section>
+		);
+	}
 	const currentStep = steps[currentStepIndex];
 	const previousStep = () => {
 		setCurrentStepIndex((actualIndex) => actualIndex - 1);
@@ -52,16 +77,23 @@ function CookingMode() {
 	const nextStep = () => {
 		setCurrentStepIndex((actualIndex) => actualIndex + 1);
 	};
+	const handleNextOrFinish = () => {
+		if (currentStepIndex === steps.length - 1) {
+			setRecipeCompleted(true);
+		} else {
+			nextStep();
+		}
+	};
 
 	return (
-		<section className="p-8">
+		<section className="min-h-screen flex flex-col p-8">
 			<article>
-				<h1 className="text-3xl  font-heading font-bold ">{recipe?.title}</h1>
-				<p>
+				<h1 className="text-3xl font-heading font-bold">{recipe?.title}</h1>
+				<p className="mt-8 text-xl font-bold">
 					Étape {currentStep.number} / {steps.length}
 				</p>
 				<progress
-					className="progress progress-secondary w-full"
+					className="progress progress-secondary w-full mt-2 mb-8"
 					value={currentStepIndex + 1}
 					max={steps.length}
 				/>
@@ -80,27 +112,28 @@ function CookingMode() {
 							<ChefHat className="w-24 h-24 text-secondary" />
 						</div>
 					)}
-				</div>{" "}
-				<p>{currentStep.step}</p>
+				</div>
+				<p className="text-lg leading-relaxed mt-4">{currentStep.step}</p>
 			</article>
-			<article>
+
+			<article className="mt-auto flex gap-4 mb-4">
 				<button
 					type="button"
-					className="btn btn-block btn-primary btn-xl"
+					className="btn btn-primary btn-xl flex-1"
 					onClick={previousStep}
 					disabled={currentStepIndex === 0}
 				>
-					Etape Précédente
+					Précédent
 				</button>
 				<button
 					type="button"
-					className="btn btn-block btn-primary btn-xl"
-					onClick={nextStep}
-					disabled={currentStepIndex === steps.length - 1}
+					className="btn btn-primary btn-xl flex-1"
+					onClick={handleNextOrFinish}
 				>
-					Etape Suivante
+					{currentStepIndex === steps.length - 1 ? "Terminer" : "Suivant"}
 				</button>
 			</article>
+			<div className="h-16"> </div>
 			<Navbar />
 		</section>
 	);
