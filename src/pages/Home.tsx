@@ -1,4 +1,4 @@
-import GetRecipes from "../components/RecipesByIngredients";
+import GetRecipes from "../components/GetRecipes";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import IngredientsList from "../components/IngredientsList";
@@ -33,9 +33,9 @@ function Home() {
 					ingredients={selectedIngredients}
 					onRemoveIngredient={removeIngredient}
 				/>
-				<GetRecipes />
+				<GetRecipes selectedIngredients={selectedIngredients} />
 			</section>
-			<section className="p-8">
+			{/* <section className="p-8">
 				<article>
 					<h2 className="mt-8 font-bold text-2xl">Entrée du moment</h2>
 					<RecipeCard />
@@ -48,7 +48,7 @@ function Home() {
 					<h2 className="mt-8 font-bold text-2xl">Dessert du moment</h2>
 					<RecipeCard />
 				</article>
-			</section>
+			</section> */}
 			<footer>
 				<p className="m-4 text-center text-text-muted">Copyright &copy; 2026</p>
 			</footer>
