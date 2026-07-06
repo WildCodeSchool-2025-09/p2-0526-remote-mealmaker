@@ -20,7 +20,7 @@ function FilterMenu() {
 							<h3 className="font-heading text-lg text-primary font-semibold">
 								Filtres
 							</h3>
-                            <hr className="border-base-300" />
+							<hr className="border-base-300" />
 							<li>
 								<label className="label cursor-pointer">
 									<span> Vegan </span>
@@ -39,7 +39,7 @@ function FilterMenu() {
 									<input type="checkbox" className="checkbox checkbox-secondary" />
 								</label>
 							</li>
-                            <hr className="border-base-300" />
+							<hr className="border-base-300" />
 							<li>
 								<select className="select select-bordered w-full border-primary/20">
 									<option>Regime</option>
@@ -52,6 +52,23 @@ function FilterMenu() {
 									<option>Allergy</option>
 									<option>Lactose</option>
 								</select>
+							</li>
+							<li>
+								<div className="flex justify-center gap-3 pt-2">
+									<button
+										type="button"
+										className="btn btn-outline btn-secondary"
+									>
+										Reset
+									</button>
+
+									<button
+										type="button"
+										className="btn btn-secondary"
+									>
+										Apply
+									</button>
+								</div>
 							</li>
 						</ul>
 					</div>

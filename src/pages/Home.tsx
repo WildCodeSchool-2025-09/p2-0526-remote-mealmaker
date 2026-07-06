@@ -9,6 +9,13 @@ import { useState } from "react";
 
 function Home() {
 	const [selectedIngredients, setSelectedIngredients] = useState([]);
+	const [filters, setFilters] = useState({
+		vegan: false,
+		healthy: false,
+		sport: false,
+		diet: "",
+		intolerances: "",
+	})
 
 	function addIngredient(ingredient) {
 		setSelectedIngredients((previous) => {

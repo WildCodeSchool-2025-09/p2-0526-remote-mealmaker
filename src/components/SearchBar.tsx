@@ -2,6 +2,8 @@ import { Search } from "lucide-react";
 import { useState } from "react";
 import FilterMenu from "./FilterMenu";
 
+
+
 const commonIngredients = [
 	{
 		id: 1001,
