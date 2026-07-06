@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { ChefHat } from "lucide-react";
+import Navbar from "../components/NavBar";
+
+type RecipeIngredient = {
+	id: number;
+	name: string;
+	image: string;
+};
 
 type RecipeStep = {
 	number: number;
 	step: string;
 	length?: { number: number; unit: string };
+	ingredients: RecipeIngredient[];
 };
+
 type CookingRecipe = {
 	title: string;
 	analyzedInstructions: { steps: RecipeStep[] }[];
@@ -47,10 +56,31 @@ function CookingMode() {
 	return (
 		<section className="p-8">
 			<article>
-				<h1>Mode cuisine — {recipe?.title}</h1>
+				<h1 className="text-3xl  font-heading font-bold ">{recipe?.title}</h1>
 				<p>
 					Étape {currentStep.number} / {steps.length}
 				</p>
+				<progress
+					className="progress progress-secondary w-full"
+					value={currentStepIndex + 1}
+					max={steps.length}
+				/>
+				<div className="flex flex-wrap gap-2 py-4">
+					{currentStep.ingredients.length > 0 ? (
+						currentStep.ingredients.map((ingredient) => (
+							<img
+								key={`${ingredient.id}-${ingredient.name}`}
+								src={`https://img.spoonacular.com/ingredients_100x100/${ingredient.image}`}
+								alt={ingredient.name}
+								className="w-24 h-24 rounded-lg object-contain p-2 border-2 border-sage bg-base-200"
+							/>
+						))
+					) : (
+						<div className="w-24 h-24 rounded-lg bg-base-200 flex items-center justify-center border-2 border-sage">
+							<ChefHat className="w-24 h-24 text-secondary" />
+						</div>
+					)}
+				</div>{" "}
 				<p>{currentStep.step}</p>
 			</article>
 			<article>
@@ -60,7 +90,6 @@ function CookingMode() {
 					onClick={previousStep}
 					disabled={currentStepIndex === 0}
 				>
-					{" "}
 					Etape Précédente
 				</button>
 				<button
@@ -69,10 +98,10 @@ function CookingMode() {
 					onClick={nextStep}
 					disabled={currentStepIndex === steps.length - 1}
 				>
-					{" "}
 					Etape Suivante
-				</button>{" "}
+				</button>
 			</article>
+			<Navbar />
 		</section>
 	);
 }
