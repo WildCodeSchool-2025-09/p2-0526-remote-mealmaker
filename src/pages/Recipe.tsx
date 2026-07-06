@@ -13,6 +13,7 @@ import {
 	Timer,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Recipe() {
 	const { id } = useParams();
@@ -117,7 +118,14 @@ function Recipe() {
 				</ul>
 			</section>
 
-			{/* <button className=" w-full flex justify-center rounded-sm text-surface bg-brand-hover ">Lancer la recette</button> */}
+			<div className="p-8">
+				<Link
+					to={`/recipe/${id}/cooking`}
+					className="btn btn-block btn-primary btn-xl"
+				>
+					Lancer la recette
+				</Link>
+			</div>
 
 			<div className="w-full h-24"> </div>
 			<Navbar />
