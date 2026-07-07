@@ -15,7 +15,7 @@ function Home() {
 		sport: false,
 		diet: "",
 		intolerances: "",
-	})
+	});
 
 	function addIngredient(ingredient) {
 		setSelectedIngredients((previous) => {
@@ -29,18 +29,25 @@ function Home() {
 			previous.filter((item) => item.id !== id),
 		);
 	}
-
+	console.info(filters);
 	return (
 		<>
 			<Header />
 			<Hero />
 			<section className="flex flex-col p-8 gap-4">
-				<SearchBar onAddIngredient={addIngredient} />
+				<SearchBar
+					onAddIngredient={addIngredient}
+					filters={filters}
+					setFilters={setFilters}
+				/>
 				<IngredientsList
 					ingredients={selectedIngredients}
 					onRemoveIngredient={removeIngredient}
 				/>
-				<GetRecipes selectedIngredients={selectedIngredients} />
+				<GetRecipes
+					selectedIngredients={selectedIngredients}
+					filters={filters}
+				/>
 			</section>
 			{/* <section className="p-8">
 				<article>

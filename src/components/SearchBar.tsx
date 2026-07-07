@@ -2,8 +2,6 @@ import { Search } from "lucide-react";
 import { useState } from "react";
 import FilterMenu from "./FilterMenu";
 
-
-
 const commonIngredients = [
 	{
 		id: 1001,
@@ -43,7 +41,7 @@ const commonIngredients = [
 	},
 ];
 
-function SearchBar({ onAddIngredient }) {
+function SearchBar({ onAddIngredient, filters, setFilters }) {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
 
@@ -105,7 +103,7 @@ function SearchBar({ onAddIngredient }) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				<FilterMenu />
+				<FilterMenu filters={filters} setFilters={setFilters} />
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 

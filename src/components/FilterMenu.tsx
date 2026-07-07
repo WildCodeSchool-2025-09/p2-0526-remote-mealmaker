@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 
-function FilterMenu() {
+function FilterMenu({ filters, setFilters }) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
@@ -24,33 +24,82 @@ function FilterMenu() {
 							<li>
 								<label className="label cursor-pointer">
 									<span> Vegan </span>
-									<input type="checkbox" className="checkbox checkbox-secondary" />
+									<input
+										type="checkbox"
+										className="checkbox checkbox-secondary"
+										checked={filters.vegan}
+										onChange={(e) =>
+											setFilters({
+												...filters,
+												vegan: e.target.checked,
+											})
+										}
+									/>
 								</label>
 							</li>
 							<li>
 								<label className="label cursor-pointer">
 									<span> Healthy </span>
-									<input type="checkbox" className="checkbox checkbox-secondary" />
+									<input
+										type="checkbox"
+										className="checkbox checkbox-secondary"
+										checked={filters.healthy}
+										onChange={(e) =>
+											setFilters({
+												...filters,
+												healthy: e.target.checked,
+											})
+										}
+									/>
 								</label>
 							</li>
 							<li>
 								<label className="label cursor-pointer">
 									<span> Sport </span>
-									<input type="checkbox" className="checkbox checkbox-secondary" />
+									<input
+										type="checkbox"
+										className="checkbox checkbox-secondary"
+										checked={filters.sport}
+										onChange={(e) =>
+											setFilters({
+												...filters,
+												sport: e.target.checked,
+											})
+										}
+									/>
 								</label>
 							</li>
 							<hr className="border-base-300" />
 							<li>
-								<select className="select select-bordered w-full border-primary/20">
+								<select
+									className="select select-bordered w-full border-primary/20"
+									value={filters.diet}
+									onChange={(e) =>
+										setFilters({
+											...filters,
+											diet: e.target.value,
+										})
+									}
+								>
 									<option>Regime</option>
 									<option>Vegetarian</option>
 									<option>Gluten free</option>
 								</select>
 							</li>
 							<li>
-								<select className="select select-bordered w-full border-primary/20">
+								<select
+									className="select select-bordered w-full border-primary/20"
+									value={filters.intolerances}
+									onChange={(e) =>
+										setFilters({
+											...filters,
+											intolerances: e.target.value,
+										})
+									}
+								>
 									<option>Allergy</option>
 									<option>Lactose</option>
+									<option>Peanuts</option>
 								</select>
 							</li>
 							<li>
@@ -62,10 +111,7 @@ function FilterMenu() {
 										Reset
 									</button>
 
-									<button
-										type="button"
-										className="btn btn-secondary"
-									>
+									<button type="button" className="btn btn-secondary">
 										Apply
 									</button>
 								</div>
