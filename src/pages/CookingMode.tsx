@@ -30,13 +30,14 @@ function CookingMode() {
 	const [recipeCompleted, setRecipeCompleted] = useState(false);
 
 	useEffect(() => {
-		const myApiKey = import.meta.env.VITE_API_URL;
+		// const myApiKey = import.meta.env.VITE_API_URL;
 
-		fetch(
-			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${myApiKey}`,
-		)
-			.then((response) => response.json())
-			.then((data) => setRecipe(data));
+		// fetch(
+		// 	`https://api.spoonacular.com/recipes/${id}/information?apiKey=${myApiKey}`,
+		// )
+		// 	.then((response) => response.json())
+		// 	.then((data) => setRecipe(data));
+		setRecipe(testRecipe as CookingRecipe);
 	}, [id]);
 
 	const steps = recipe?.analyzedInstructions[0]?.steps ?? [];
