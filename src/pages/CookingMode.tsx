@@ -19,6 +19,7 @@ type RecipeStep = {
 };
 
 type CookingRecipe = {
+	image: string | undefined;
 	title: string;
 	analyzedInstructions: { steps: RecipeStep[] }[];
 };
@@ -87,14 +88,14 @@ function CookingMode() {
 	};
 
 	return (
-		<section className="min-h-screen flex flex-col p-8">
+		<section className="min-h-screen flex flex-col p-8 bg-[#5e4b00] bg-[url('/bg-wood.png')] text-neutral-content">
 			<article>
 				<h1 className="text-3xl font-heading font-bold">{recipe?.title}</h1>
 				<p className="mt-8 text-xl font-bold">
 					Étape {currentStep.number} / {steps.length}
 				</p>
 				<progress
-					className="progress progress-secondary w-full mt-2 mb-8"
+					className="progress w-full mt-2 mb-8 [&::-webkit-progress-bar]:bg-neutral-content/20 [&::-webkit-progress-value]:bg-neutral-content [&::-moz-progress-bar]:bg-neutral-content"
 					value={currentStepIndex + 1}
 					max={steps.length}
 				/>
@@ -116,11 +117,10 @@ function CookingMode() {
 				</div>
 				<p className="text-lg leading-relaxed mt-4">{currentStep.step}</p>
 			</article>
-
 			<article className="mt-auto flex gap-4 mb-4">
 				<button
 					type="button"
-					className="btn btn-primary btn-xl flex-1"
+					className="btn btn-primary shadow-xl/20 btn-xl flex-1"
 					onClick={previousStep}
 					disabled={currentStepIndex === 0}
 				>
@@ -128,7 +128,7 @@ function CookingMode() {
 				</button>
 				<button
 					type="button"
-					className="btn btn-primary btn-xl flex-1"
+					className="btn btn-primary shadow-xl/20 btn-xl flex-1"
 					onClick={handleNextOrFinish}
 				>
 					{currentStepIndex === steps.length - 1 ? "Terminer" : "Suivant"}
