@@ -1,10 +1,16 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
+import type { Recipe } from "./RecipeCard";
+import type { Ingredient } from "../types";
 
-function GetRecipes({ selectedIngredients }) {
-	const [recipeByIngredients, setRecipeByIngredients] = useState([]);
+type GetRecipesProps = {
+	selectedIngredients: Ingredient[];
+};
 
-	function fetchRecipeByIngredients(selectedIngredients: string[]) {
+function GetRecipes({ selectedIngredients }: GetRecipesProps) {
+	const [recipeByIngredients, setRecipeByIngredients] = useState<Recipe[]>([]);
+
+	function fetchRecipeByIngredients(selectedIngredients: Ingredient[]) {
 		const myApiKey = import.meta.env.VITE_API_URL;
 
 		const ingredients = selectedIngredients
@@ -14,9 +20,8 @@ function GetRecipes({ selectedIngredients }) {
 		fetch(
 			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=${myApiKey}`,
 		)
-
 			.then((response) => response.json())
-			.then((data) => {
+			.then((data: Recipe[]) => {
 				setRecipeByIngredients(data);
 				return;
 			});
