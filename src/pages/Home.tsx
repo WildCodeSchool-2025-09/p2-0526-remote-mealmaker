@@ -1,23 +1,26 @@
-import GetRecipes from "../components/RecipesByIngredients";
+import GetRecipes from "../components/GetRecipes";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import IngredientsList from "../components/IngredientsList";
-import RecipeCard from "../components/RecipeCard";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
+import type { Ingredient } from "../types";
 
 function Home() {
-	const [selectedIngredients, setSelectedIngredients] = useState([]);
+	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
+		[],
+	);
 
-	function addIngredient(ingredient) {
+	function addIngredient(ingredient: Ingredient) {
 		setSelectedIngredients((previous) => {
 			const alreadyExists = previous.some((item) => item.id === ingredient.id);
 			if (alreadyExists) return previous;
 			return [...previous, ingredient];
 		});
 	}
-	function removeIngredient(id) {
+
+	function removeIngredient(id: number) {
 		setSelectedIngredients((previous) =>
 			previous.filter((item) => item.id !== id),
 		);
@@ -33,21 +36,7 @@ function Home() {
 					ingredients={selectedIngredients}
 					onRemoveIngredient={removeIngredient}
 				/>
-				<GetRecipes />
-			</section>
-			<section className="p-8">
-				<article>
-					<h2 className="mt-8 font-bold text-2xl">Entrée du moment</h2>
-					<RecipeCard />
-				</article>
-				<article>
-					<h2 className="mt-8 font-bold text-2xl">Plat du moment</h2>
-					<RecipeCard />
-				</article>
-				<article>
-					<h2 className="mt-8 font-bold text-2xl">Dessert du moment</h2>
-					<RecipeCard />
-				</article>
+				<GetRecipes selectedIngredients={selectedIngredients} />
 			</section>
 			<footer>
 				<p className="m-4 text-center text-text-muted">Copyright &copy; 2026</p>
