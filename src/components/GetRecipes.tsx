@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
 
-function GetRecipes({ selectedIngredients, filters, }) {
+function GetRecipes({ selectedIngredients, filters }) {
 	console.info(selectedIngredients);
 	const [recipeByIngredients, setRecipeByIngredients] = useState([]);
 
@@ -12,14 +12,24 @@ function GetRecipes({ selectedIngredients, filters, }) {
 			.map((ingredient) => ingredient.name)
 			.join(",");
 
-		fetch(
-			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=${myApiKey}`,
-		)
+		let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${myApiKey}`;
 
+		url += `&includeIngredients=${ingredients}`;
+
+		if (filters.diet) {
+			url += `&diet=${filters.diet}`;
+		}
+
+		if (filters.intolerances) {
+			url += `&intolerances=${filters.intolerances}`;
+		}
+		console.info(url);
+		
+		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
 				console.info(data);
-				setRecipeByIngredients(data);
+				setRecipeByIngredients(data.results);
 				return;
 			});
 	}
