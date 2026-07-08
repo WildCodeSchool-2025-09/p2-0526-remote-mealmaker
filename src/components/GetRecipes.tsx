@@ -2,7 +2,6 @@ import { useState } from "react";
 import RecipeCard from "./RecipeCard";
 
 function GetRecipes({ selectedIngredients }) {
-	console.info(selectedIngredients);
 	const [recipeByIngredients, setRecipeByIngredients] = useState([]);
 
 	function fetchRecipeByIngredients(selectedIngredients: string[]) {
@@ -18,7 +17,6 @@ function GetRecipes({ selectedIngredients }) {
 
 			.then((response) => response.json())
 			.then((data) => {
-				console.info(data);
 				setRecipeByIngredients(data);
 				return;
 			});
