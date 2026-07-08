@@ -2,7 +2,6 @@ import GetRecipes from "../components/GetRecipes";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import IngredientsList from "../components/IngredientsList";
-import RecipeCard from "../components/RecipeCard";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
@@ -17,6 +16,7 @@ function Home() {
 			return [...previous, ingredient];
 		});
 	}
+	
 	function removeIngredient(id) {
 		setSelectedIngredients((previous) =>
 			previous.filter((item) => item.id !== id),
@@ -52,7 +52,6 @@ function Home() {
 			<footer>
 				<p className="m-4 text-center text-text-muted">Copyright &copy; 2026</p>
 			</footer>
-			<div className="w-full h-24"> </div>
 			<Navbar />
 		</>
 	);
