@@ -23,12 +23,10 @@ function GetRecipes({ selectedIngredients, filters }) {
 		if (filters.intolerances) {
 			url += `&intolerances=${filters.intolerances}`;
 		}
-		console.info(url);
 		
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
-				console.info(data);
 				setRecipeByIngredients(data.results);
 				return;
 			});

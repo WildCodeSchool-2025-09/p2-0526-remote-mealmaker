@@ -71,6 +71,7 @@ function FilterMenu({ filters, setFilters }) {
 							</li>
 							<hr className="border-base-300" />
 							<li>
+								<p className="font-heading text-lg text-primary font-semibold">Regime</p>
 								<select
 									className="select select-bordered w-full border-primary/20"
 									value={filters.diet}
@@ -81,12 +82,13 @@ function FilterMenu({ filters, setFilters }) {
 										})
 									}
 								>
-									<option>Regime</option>
+									<option />
 									<option>Vegetarian</option>
 									<option>Gluten free</option>
 								</select>
 							</li>
 							<li>
+								<p className="font-heading text-lg text-primary font-semibold">Allergy</p>
 								<select
 									className="select select-bordered w-full border-primary/20"
 									value={filters.intolerances}
@@ -97,7 +99,7 @@ function FilterMenu({ filters, setFilters }) {
 										})
 									}
 								>
-									<option>Allergy</option>
+									<option />
 									<option>Lactose</option>
 									<option>Peanuts</option>
 								</select>
