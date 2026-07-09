@@ -2,7 +2,6 @@ import { useState } from "react";
 import RecipeCard from "./RecipeCard";
 
 function GetRecipes({ selectedIngredients }) {
-	console.info(selectedIngredients);
 	const [recipeByIngredients, setRecipeByIngredients] = useState([]);
 
 	function fetchRecipeByIngredients(selectedIngredients: string[]) {

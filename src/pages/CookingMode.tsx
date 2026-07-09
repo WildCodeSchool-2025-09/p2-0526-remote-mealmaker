@@ -1,47 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ChefHat } from "lucide-react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import Navbar from "../components/NavBar";
 import { Link } from "react-router-dom";
-import testRecipe from "../recipes.model.json";
+import useRecipeById from "../hooks/useRecipeById";
+import QuitButton from "../components/CookingMode/QuitButton";
+import ProgressBar from "../components/CookingMode/ProgressBar";
 
-type RecipeIngredient = {
-	id: number;
-	name: string;
-	image: string;
-};
-
-type RecipeStep = {
-	number: number;
-	step: string;
-	length?: { number: number; unit: string };
-	ingredients: RecipeIngredient[];
-};
-
-type CookingRecipe = {
-	image: string | undefined;
-	title: string;
-	analyzedInstructions: { steps: RecipeStep[] }[];
-};
+// import testRecipe from "../recipes.model.json";
 
 function CookingMode() {
 	const { id } = useParams();
-	const [recipe, setRecipe] = useState<CookingRecipe>();
+	const { recipe } = useRecipeById(Number(id));
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 	const [recipeCompleted, setRecipeCompleted] = useState(false);
-	const navigate = useNavigate();
-	const quitModalRef = useRef<HTMLDialogElement>(null);
-
-	useEffect(() => {
-		const myApiKey = import.meta.env.VITE_API_URL;
-
-		fetch(
-			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${myApiKey}`,
-		)
-			.then((response) => response.json())
-			.then((data) => setRecipe(data));
-		// setRecipe(testRecipe as CookingRecipe);
-	}, [id]);
 
 	const steps = recipe?.analyzedInstructions[0]?.steps ?? [];
 
@@ -91,48 +63,17 @@ function CookingMode() {
 
 	return (
 		<section className="min-h-screen flex flex-col p-8 bg-[#5e4b00] bg-[url('/bg-wood.png')] text-neutral-content">
-			<button
-				type="button"
-				className="btn btn-primary self-end mb-4 py-5"
-				onClick={() => quitModalRef.current?.showModal()}
-			>
-				Quitter le mode cuisine
-			</button>
-			<dialog ref={quitModalRef} className="modal">
-				<div className="modal-box text-base-content">
-					<h3 className="font-bold text-lg">Quitter le mode cuisine ?</h3>
-					<p className="py-4">
-						Ta progression dans les étapes ne sera pas conservée.
-					</p>
-					<div className="modal-action">
-						<button
-							type="button"
-							className="btn"
-							onClick={() => quitModalRef.current?.close()}
-						>
-							Annuler
-						</button>
-						<button
-							type="button"
-							className="btn btn-error"
-							onClick={() => navigate(`/recipe/${id}`)}
-						>
-							Quitter
-						</button>
-					</div>
-				</div>
-			</dialog>
+			<QuitButton id={Number(id)} />
 
 			<article>
 				<h1 className="text-3xl font-heading font-bold">{recipe?.title}</h1>
-				<p className="mt-8 text-xl font-bold">
-					Étape {currentStep.number} / {steps.length}
-				</p>
-				<progress
-					className="progress w-full mt-2 mb-8 [&::-webkit-progress-bar]:bg-neutral-content/20 [&::-webkit-progress-value]:bg-neutral-content [&::-moz-progress-bar]:bg-neutral-content"
-					value={currentStepIndex + 1}
-					max={steps.length}
+
+				<ProgressBar
+					currentStep={currentStep}
+					steps={steps}
+					currentStepIndex={currentStepIndex}
 				/>
+
 				<div className="flex flex-wrap gap-2 py-4">
 					{currentStep.ingredients.length > 0 ? (
 						currentStep.ingredients.map((ingredient) => (

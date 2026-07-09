@@ -6,8 +6,8 @@ interface MinuteurProps {
 	onStatusChange?: (isRunning: boolean) => void;
 }
 
-function MinuteurComposant({
-	initialTimeMs = 30000,
+function CountdownCooking({
+	initialTimeMs = 30000, //en phase test a 30 secondes
 	onTimerEnd,
 	onStatusChange,
 }: MinuteurProps) {
@@ -83,7 +83,7 @@ function MinuteurComposant({
 
 	return (
 		<>
-			<article className="w-1/3 flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-surface">
+			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background ">
 				<h1 id="display" className="text-center">
 					Minuteur
 				</h1>
@@ -102,7 +102,7 @@ function MinuteurComposant({
 						type="button"
 						className="btn btn-sm btn-error"
 					>
-						Arreter/reset
+						Réinitialiser
 					</button>
 				</div>
 			</article>
@@ -110,4 +110,4 @@ function MinuteurComposant({
 	);
 }
 
-export default MinuteurComposant;
+export default CountdownCooking;

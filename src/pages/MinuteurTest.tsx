@@ -1,10 +1,10 @@
-import MinuteurComposant from "../components/MinuteurComposant";
+import CountdownCooking from "../components/CountdownCooking";
 
 function MinuteurTest() {
 	return (
 		<>
 			<section className="w-full h-screen flex justify-center items-center">
-				<MinuteurComposant />
+				<CountdownCooking />
 			</section>
 		</>
 	);
