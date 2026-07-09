@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChefHat } from "lucide-react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Navbar from "../components/NavBar";
 import { Link } from "react-router-dom";
 import testRecipe from "../recipes.model.json";
@@ -89,6 +89,10 @@ function CookingMode() {
 
 	return (
 		<section className="min-h-screen flex flex-col p-8 bg-[#5e4b00] bg-[url('/bg-wood.png')] text-neutral-content">
+			<Link to={`/recipe/${id}`} className="btn btn-primary self-end py-6 mb-4">
+				Quitter le mode cuisine
+			</Link>
+
 			<article>
 				<h1 className="text-3xl font-heading font-bold">{recipe?.title}</h1>
 				<p className="mt-8 text-xl font-bold">
