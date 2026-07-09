@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import useRecipeById from "../hooks/useRecipeById";
 import QuitButton from "../components/CookingMode/QuitButton";
 import ProgressBar from "../components/CookingMode/ProgressBar";
+import TimerCookModule from "../components/CookingMode/TimerCookModule";
 
 // import testRecipe from "../recipes.model.json";
 
@@ -90,6 +91,9 @@ function CookingMode() {
 						</div>
 					)}
 				</div>
+
+				<TimerCookModule currentStep={currentStep} />
+
 				<p className="text-lg leading-relaxed mt-4">{currentStep.step}</p>
 			</article>
 			<article className="mt-auto flex gap-4 mb-4">
