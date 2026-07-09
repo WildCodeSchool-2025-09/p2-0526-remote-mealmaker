@@ -1,4 +1,7 @@
-function IngredientsView() {
+import { ChefHat } from "lucide-react";
+import type { RecipeStep } from "../../types/recipe.types";
+
+function IngredientsView({ currentStep }: { currentStep: RecipeStep }) {
 	return (
 		<>
 			<div className="flex flex-wrap gap-2 py-4">

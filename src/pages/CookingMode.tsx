@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { ChefHat } from "lucide-react";
 import { useParams } from "react-router";
-import Navbar from "../components/NavBar";
 import { Link } from "react-router-dom";
+import Navbar from "../components/NavBar";
 import useRecipeById from "../hooks/useRecipeById";
 import QuitButton from "../components/CookingMode/QuitButton";
 import ProgressBar from "../components/CookingMode/ProgressBar";
-
-// import testRecipe from "../recipes.model.json";
+import IngredientsView from "../components/CookingMode/IngredientsView";
+import StepNavigation from "../components/CookingMode/StepNavigation";
 
 function CookingMode() {
 	const { id } = useParams();
 	const { recipe } = useRecipeById(Number(id));
-	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 	const [recipeCompleted, setRecipeCompleted] = useState(false);
+	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
 	const steps = recipe?.analyzedInstructions[0]?.steps ?? [];
 
@@ -46,27 +45,22 @@ function CookingMode() {
 			</section>
 		);
 	}
+
 	const currentStep = steps[currentStepIndex];
+
 	const previousStep = () => {
 		setCurrentStepIndex((actualIndex) => actualIndex - 1);
 	};
 	const nextStep = () => {
 		setCurrentStepIndex((actualIndex) => actualIndex + 1);
 	};
-	const handleNextOrFinish = () => {
-		if (currentStepIndex === steps.length - 1) {
-			setRecipeCompleted(true);
-		} else {
-			nextStep();
-		}
-	};
 
 	return (
 		<section className="min-h-screen flex flex-col p-8 bg-[#5e4b00] bg-[url('/bg-wood.png')] text-neutral-content">
-			<QuitButton id={Number(id)} />
+			<QuitButton id={id} />
 
 			<article>
-				<h1 className="text-3xl font-heading font-bold">{recipe?.title}</h1>
+				<h1 className="text-3xl font-heading font-bold">{recipe.title}</h1>
 
 				<ProgressBar
 					currentStep={currentStep}
@@ -74,41 +68,19 @@ function CookingMode() {
 					currentStepIndex={currentStepIndex}
 				/>
 
-				<div className="flex flex-wrap gap-2 py-4">
-					{currentStep.ingredients.length > 0 ? (
-						currentStep.ingredients.map((ingredient) => (
-							<img
-								key={`${ingredient.id}-${ingredient.name}`}
-								src={`https://img.spoonacular.com/ingredients_100x100/${ingredient.image}`}
-								alt={ingredient.name}
-								className="w-24 h-24 rounded-lg object-contain p-2 border-2 border-sage bg-base-200"
-							/>
-						))
-					) : (
-						<div className="w-24 h-24 rounded-lg bg-base-200 flex items-center justify-center border-2 border-sage">
-							<ChefHat className="w-24 h-24 text-secondary" />
-						</div>
-					)}
-				</div>
+				<IngredientsView currentStep={currentStep} />
+
 				<p className="text-lg leading-relaxed mt-4">{currentStep.step}</p>
 			</article>
-			<article className="mt-auto flex gap-4 mb-4">
-				<button
-					type="button"
-					className="btn btn-primary shadow-xl/20 btn-xl flex-1"
-					onClick={previousStep}
-					disabled={currentStepIndex === 0}
-				>
-					Précédent
-				</button>
-				<button
-					type="button"
-					className="btn btn-primary shadow-xl/20 btn-xl flex-1"
-					onClick={handleNextOrFinish}
-				>
-					{currentStepIndex === steps.length - 1 ? "Terminer" : "Suivant"}
-				</button>
-			</article>
+
+			<StepNavigation
+				currentStepIndex={currentStepIndex}
+				stepsCount={steps.length}
+				onPrevious={previousStep}
+				onNext={nextStep}
+				onFinish={() => setRecipeCompleted(true)}
+			/>
+
 			<div className="h-16"> </div>
 			<Navbar />
 		</section>

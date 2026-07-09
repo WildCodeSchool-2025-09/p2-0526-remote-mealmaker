@@ -1,9 +1,10 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-function QuitButton({ id }: { id: number }) {
+function QuitButton({ id }: { id: string | undefined }) {
 	const navigate = useNavigate();
 	const quitModalRef = useRef<HTMLDialogElement>(null);
+
 	return (
 		<>
 			<button
