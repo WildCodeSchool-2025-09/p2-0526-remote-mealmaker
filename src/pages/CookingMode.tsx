@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChefHat } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import Navbar from "../components/NavBar";
@@ -29,16 +29,18 @@ function CookingMode() {
 	const [recipe, setRecipe] = useState<CookingRecipe>();
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 	const [recipeCompleted, setRecipeCompleted] = useState(false);
+	const navigate = useNavigate();
+	const quitModalRef = useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
-		// const myApiKey = import.meta.env.VITE_API_URL;
+		const myApiKey = import.meta.env.VITE_API_URL;
 
-		// fetch(
-		// 	`https://api.spoonacular.com/recipes/${id}/information?apiKey=${myApiKey}`,
-		// )
-		// 	.then((response) => response.json())
-		// 	.then((data) => setRecipe(data));
-		setRecipe(testRecipe as CookingRecipe);
+		fetch(
+			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${myApiKey}`,
+		)
+			.then((response) => response.json())
+			.then((data) => setRecipe(data));
+		// setRecipe(testRecipe as CookingRecipe);
 	}, [id]);
 
 	const steps = recipe?.analyzedInstructions[0]?.steps ?? [];
@@ -89,9 +91,37 @@ function CookingMode() {
 
 	return (
 		<section className="min-h-screen flex flex-col p-8 bg-[#5e4b00] bg-[url('/bg-wood.png')] text-neutral-content">
-			<Link to={`/recipe/${id}`} className="btn btn-primary self-end py-6 mb-4">
+			<button
+				type="button"
+				className="btn btn-primary self-end mb-4 py-5"
+				onClick={() => quitModalRef.current?.showModal()}
+			>
 				Quitter le mode cuisine
-			</Link>
+			</button>
+			<dialog ref={quitModalRef} className="modal">
+				<div className="modal-box text-base-content">
+					<h3 className="font-bold text-lg">Quitter le mode cuisine ?</h3>
+					<p className="py-4">
+						Ta progression dans les étapes ne sera pas conservée.
+					</p>
+					<div className="modal-action">
+						<button
+							type="button"
+							className="btn"
+							onClick={() => quitModalRef.current?.close()}
+						>
+							Annuler
+						</button>
+						<button
+							type="button"
+							className="btn btn-error"
+							onClick={() => navigate(`/recipe/${id}`)}
+						>
+							Quitter
+						</button>
+					</div>
+				</div>
+			</dialog>
 
 			<article>
 				<h1 className="text-3xl font-heading font-bold">{recipe?.title}</h1>
