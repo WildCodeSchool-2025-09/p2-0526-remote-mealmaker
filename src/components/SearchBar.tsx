@@ -1,10 +1,8 @@
 import { Menu, Search } from "lucide-react";
 import { useState } from "react";
-import type { Ingredient } from "../types";
+import type { Ingredient, SearchBarProps } from "../types/recipe.types";
 
-type QuickIngredient = Ingredient & { label: string };
-
-const commonIngredients: QuickIngredient[] = [
+const commonIngredients = [
 	{
 		id: 1001,
 		name: "butter",
@@ -43,16 +41,6 @@ const commonIngredients: QuickIngredient[] = [
 	},
 ];
 
-type AutocompleteResult = {
-	id: number;
-	name: string;
-	image: string;
-};
-
-type SearchBarProps = {
-	onAddIngredient: (ingredient: Ingredient) => void;
-};
-
 function SearchBar({ onAddIngredient }: SearchBarProps) {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
@@ -66,9 +54,9 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 			`https://api.spoonacular.com/food/ingredients/autocomplete?query=${query}&metaInformation=true&apiKey=${myApiKey}`,
 		)
 			.then((response) => response.json())
-			.then((results: AutocompleteResult[]) => {
+			.then((results) => {
 				const match = results.find(
-					(item) => item.name.toLowerCase() === query.toLowerCase(),
+					(item:{name:string}) => item.name.toLowerCase() === query.toLowerCase(),
 				);
 
 				if (!match) {
@@ -86,13 +74,13 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 			});
 	}
 
-	function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+	function handleKeyDown(event:{key: string}) {
 		if (event.key === "Enter") {
 			handleSearch();
 		}
 	}
 
-	function handleQuickAdd(ingredient: QuickIngredient) {
+	function handleQuickAdd(ingredient:Ingredient) {
 		onAddIngredient({
 			id: ingredient.id,
 			name: ingredient.name,

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
-import type { Recipe } from "./RecipeCard";
-import type { Ingredient } from "../types";
+import type { Ingredient, Recipe } from "../types/recipe.types";
 
 type GetRecipesProps = {
 	selectedIngredients: Ingredient[];

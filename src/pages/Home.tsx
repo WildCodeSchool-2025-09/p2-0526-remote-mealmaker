@@ -5,21 +5,19 @@ import IngredientsList from "../components/IngredientsList";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
-import type { Ingredient } from "../types";
+import type { Ingredient } from "../types/recipe.types";
 
 function Home() {
-	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
-		[],
-	);
+	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
 
 	function addIngredient(ingredient: Ingredient) {
-		setSelectedIngredients((previous) => {
+		setSelectedIngredients((previous: Ingredient[]) => {
 			const alreadyExists = previous.some((item) => item.id === ingredient.id);
 			if (alreadyExists) return previous;
 			return [...previous, ingredient];
 		});
 	}
-
+	
 	function removeIngredient(id: number) {
 		setSelectedIngredients((previous) =>
 			previous.filter((item) => item.id !== id),
@@ -38,10 +36,23 @@ function Home() {
 				/>
 				<GetRecipes selectedIngredients={selectedIngredients} />
 			</section>
+			{/* <section className="p-8">
+				<article>
+					<h2 className="mt-8 font-bold text-2xl">Entrée du moment</h2>
+					<RecipeCard />
+				</article>
+				<article>
+					<h2 className="mt-8 font-bold text-2xl">Plat du moment</h2>
+					<RecipeCard />
+				</article>
+				<article>
+					<h2 className="mt-8 font-bold text-2xl">Dessert du moment</h2>
+					<RecipeCard />
+				</article>
+			</section> */}
 			<footer>
 				<p className="m-4 text-center text-text-muted">Copyright &copy; 2026</p>
 			</footer>
-			<div className="w-full h-24"> </div>
 			<Navbar />
 		</>
 	);
