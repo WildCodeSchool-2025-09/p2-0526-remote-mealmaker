@@ -1,13 +1,15 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface MinuteurProps {
 	initialTimeMs?: number;
 	onTimerEnd?: () => void;
+	onStatusChange?: (isRunning: boolean) => void;
 }
 
 function MinuteurComposant({
-	initialTimeMs = 300000,
+	initialTimeMs = 30000,
 	onTimerEnd,
+	onStatusChange,
 }: MinuteurProps) {
 	const [remainingTime, setRemainingTime] = useState(initialTimeMs);
 	const [isRunning, setIsRunning] = useState(false);
@@ -15,8 +17,28 @@ function MinuteurComposant({
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const targetTimeRef = useRef<number>(0);
 
+	useEffect(() => {
+		if (onStatusChange) {
+			onStatusChange(isRunning);
+		}
+	}, [isRunning, onStatusChange]);
+
+	useEffect(() => {
+		if (!isRunning) {
+			setRemainingTime(initialTimeMs);
+			if (intervalRef.current) clearInterval(intervalRef.current);
+		}
+	}, [initialTimeMs, isRunning]);
+
+	useEffect(() => {
+		return () => {
+			if (intervalRef.current) clearInterval(intervalRef.current);
+		};
+	}, []);
+
 	const formatTime = (time: number) => {
-		const date = new Date(time);
+		const safeTime = Math.max(0, time);
+		const date = new Date(safeTime);
 		const hours = date.getUTCHours().toString().padStart(2, "0");
 		const minutes = date.getUTCMinutes().toString().padStart(2, "0");
 		const seconds = date.getUTCSeconds().toString().padStart(2, "0");
