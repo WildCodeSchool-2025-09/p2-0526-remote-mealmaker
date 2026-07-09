@@ -90,3 +90,10 @@
 @utility font-body {
 	font-family: var(--font-body);
 }
+
+.select,
+.select:focus,
+.select:focus-visible {
+	outline: transparent !important;
+	box-shadow: none !important;
+}

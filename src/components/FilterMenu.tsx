@@ -90,7 +90,7 @@ function FilterMenu({ filters, setFilters }) {
 									Regime
 								</p>
 								<select
-									className="select select-bordered w-full border-primary/20"
+									className="select select-bordered w-full border-primary/20 focus:outline-none focus:ring-0 focus:shadow-none focus:border-primary"
 									value={filters.diet}
 									onChange={(e) =>
 										setFilters({
@@ -109,7 +109,7 @@ function FilterMenu({ filters, setFilters }) {
 									Allergy
 								</p>
 								<select
-									className="select select-bordered w-full border-primary/20"
+									className="select select-bordered w-full border-primary/20 focus:border-primary"
 									value={filters.intolerances}
 									onChange={(e) =>
 										setFilters({
@@ -153,7 +153,7 @@ function FilterMenu({ filters, setFilters }) {
 						</ul>
 					</div>
 				)}
-			</div>
+			</div >
 		</>
 	);
 }
