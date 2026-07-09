@@ -6,10 +6,15 @@ import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
 
-function Home() {
-	const [selectedIngredients, setSelectedIngredients] = useState([]);
+interface Ingredient {
+	id: number;
+	[key: string]: number;
+}
 
-	function addIngredient(ingredient) {
+function Home() {
+	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
+
+	function addIngredient(ingredient: Ingredient) {
 		setSelectedIngredients((previous) => {
 			const alreadyExists = previous.some((item) => item.id === ingredient.id);
 			if (alreadyExists) return previous;
@@ -17,7 +22,7 @@ function Home() {
 		});
 	}
 	
-	function removeIngredient(id) {
+	function removeIngredient(id: number) {
 		setSelectedIngredients((previous) =>
 			previous.filter((item) => item.id !== id),
 		);
