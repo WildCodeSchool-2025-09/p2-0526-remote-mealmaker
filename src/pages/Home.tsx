@@ -6,10 +6,11 @@ import RecipeCard from "../components/RecipeCard";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
+import type { Filters, Ingredient } from "../Type2";
 
 function Home() {
-	const [selectedIngredients, setSelectedIngredients] = useState([]);
-	const [filters, setFilters] = useState({
+	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
+	const [filters, setFilters] = useState<Filters>({
 		vegan: false,
 		healthy: false,
 		sport: false,

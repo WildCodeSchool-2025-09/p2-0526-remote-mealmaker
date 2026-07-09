@@ -1,7 +1,14 @@
 import { Menu } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import type { Filters } from "../Type2";
+import type { Dispatch, SetStateAction } from "react";
 
-function FilterMenu({ filters, setFilters }) {
+interface FilterMenuProps {
+	filters: Filters;
+	setFilters: Dispatch<SetStateAction<Filters>>;
+}
+
+function FilterMenu({ filters, setFilters }: FilterMenuProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
 

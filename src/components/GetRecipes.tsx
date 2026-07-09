@@ -1,11 +1,17 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
+import type { Filters, Ingredient, Recipe } from "../Type2";
 
-function GetRecipes({ selectedIngredients, filters }) {
+interface GetRecipesProps {
+	selectedIngredients: Ingredient[];
+	filters: Filters;
+}
+
+function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 	console.info(selectedIngredients);
-	const [recipeByIngredients, setRecipeByIngredients] = useState([]);
+	const [recipeByIngredients, setRecipeByIngredients] = useState<Recipe[]>([]);
 
-	function fetchRecipeByIngredients(selectedIngredients: string[]) {
+	function fetchRecipeByIngredients(selectedIngredients: Ingredient[]) {
 		const myApiKey = import.meta.env.VITE_API_URL;
 
 		const ingredients = selectedIngredients
@@ -23,7 +29,7 @@ function GetRecipes({ selectedIngredients, filters }) {
 		if (filters.intolerances) {
 			url += `&intolerances=${filters.intolerances}`;
 		}
-		
+
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
