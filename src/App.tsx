@@ -1,10 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Favorite from "./pages/Favorite";
 import Home from "./pages/Home";
 import Recipe from "./pages/Recipe";
 import ThemePreview from "./pages/ThemePreview";
 import CookingMode from "./pages/CookingMode";
-import MinuteurTest from "./pages/MinuteurTest";
 
 function App() {
 	return (
@@ -15,7 +14,7 @@ function App() {
 				<Route path="/recipe/:id/cooking" element={<CookingMode />} />
 				<Route path="/favorite" element={<Favorite />} />
 				<Route path="/themepreview" element={<ThemePreview />} />
-				<Route path="/recipe/:id/min" element={<MinuteurTest />} />
+				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		</>
 	);
