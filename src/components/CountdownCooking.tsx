@@ -1,13 +1,15 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface MinuteurProps {
 	initialTimeMs?: number;
 	onTimerEnd?: () => void;
+	onStatusChange?: (isRunning: boolean) => void;
 }
 
-function MinuteurComposant({
-	initialTimeMs = 300000,
+function CountdownCooking({
+	initialTimeMs = 30000, //en phase test a 30 secondes
 	onTimerEnd,
+	onStatusChange,
 }: MinuteurProps) {
 	const [remainingTime, setRemainingTime] = useState(initialTimeMs);
 	const [isRunning, setIsRunning] = useState(false);
@@ -15,8 +17,28 @@ function MinuteurComposant({
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const targetTimeRef = useRef<number>(0);
 
+	useEffect(() => {
+		if (onStatusChange) {
+			onStatusChange(isRunning);
+		}
+	}, [isRunning, onStatusChange]);
+
+	useEffect(() => {
+		if (!isRunning) {
+			setRemainingTime(initialTimeMs);
+			if (intervalRef.current) clearInterval(intervalRef.current);
+		}
+	}, [initialTimeMs, isRunning]);
+
+	useEffect(() => {
+		return () => {
+			if (intervalRef.current) clearInterval(intervalRef.current);
+		};
+	}, []);
+
 	const formatTime = (time: number) => {
-		const date = new Date(time);
+		const safeTime = Math.max(0, time);
+		const date = new Date(safeTime);
 		const hours = date.getUTCHours().toString().padStart(2, "0");
 		const minutes = date.getUTCMinutes().toString().padStart(2, "0");
 		const seconds = date.getUTCSeconds().toString().padStart(2, "0");
@@ -61,7 +83,7 @@ function MinuteurComposant({
 
 	return (
 		<>
-			<article className="w-1/3 flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-surface">
+			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background ">
 				<h1 id="display" className="text-center">
 					Minuteur
 				</h1>
@@ -80,7 +102,7 @@ function MinuteurComposant({
 						type="button"
 						className="btn btn-sm btn-error"
 					>
-						Arreter/reset
+						Réinitialiser
 					</button>
 				</div>
 			</article>
@@ -88,4 +110,4 @@ function MinuteurComposant({
 	);
 }
 
-export default MinuteurComposant;
+export default CountdownCooking;

@@ -7,6 +7,9 @@ import QuitButton from "../components/CookingMode/QuitButton";
 import ProgressBar from "../components/CookingMode/ProgressBar";
 import IngredientsView from "../components/CookingMode/IngredientsView";
 import StepNavigation from "../components/CookingMode/StepNavigation";
+import TimerCookModule from "../components/CookingMode/TimerCookModule";
+
+// import testRecipe from "../recipes.model.json";
 
 function CookingMode() {
 	const { id } = useParams();
@@ -69,6 +72,8 @@ function CookingMode() {
 				/>
 
 				<IngredientsView currentStep={currentStep} />
+
+				<TimerCookModule currentStep={currentStep} />
 
 				<p className="text-lg leading-relaxed mt-4">{currentStep.step}</p>
 			</article>
