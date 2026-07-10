@@ -7,7 +7,7 @@ interface MinuteurProps {
 }
 
 function CountdownCooking({
-	initialTimeMs = 30000, //en phase test a 30 secondes
+	initialTimeMs = 30000,
 	onTimerEnd,
 	onStatusChange,
 }: MinuteurProps) {
@@ -83,7 +83,7 @@ function CountdownCooking({
 
 	return (
 		<>
-			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background ">
+			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background text-primary">
 				<h1 id="display" className="text-center">
 					Minuteur
 				</h1>

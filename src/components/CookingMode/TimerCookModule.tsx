@@ -1,61 +1,45 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type RecipeStepLength = {
-	number: number;
-	unit: string;
-};
-
-type RecipeIngredient = {
-	id: number;
-	name: string;
-	image: string;
-};
-
+type RecipeStepLength = { number: number; unit: string };
+type RecipeIngredient = { id: number; name: string; image: string };
 type RecipeStep = {
 	number: number;
 	step: string;
 	length?: RecipeStepLength;
 	ingredients: RecipeIngredient[];
 };
-
 type TimerCookModuleProps = {
 	currentStep: RecipeStep;
 	onTimerEnd?: (stepText: string) => void;
 };
 
-// FONCTION PURE : Calcul de la durée de l'étape courante en millisecondes
 const getStepTimeMs = (step?: RecipeStep): number => {
 	if (!step?.length?.number) return 0;
-
 	return step.length.unit === "minutes"
 		? step.length.number * 60 * 1000
 		: step.length.number * 1000;
 };
 
-// FORMATAGE : millisecondes -> HH:MM:SS
 const formatTime = (time: number): string => {
 	const safeTime = Math.max(0, time);
 	const date = new Date(safeTime);
 	const hours = date.getUTCHours().toString().padStart(2, "0");
 	const minutes = date.getUTCMinutes().toString().padStart(2, "0");
 	const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-
 	return `${hours}:${minutes}:${seconds}`;
 };
 
 function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 	const [isRunning, setIsRunning] = useState(false);
+	const [isEngaged, setIsEngaged] = useState(false);
 	const [remainingTime, setRemainingTime] = useState(0);
 
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const targetTimeRef = useRef<number>(0);
-	// On mémorise l'étape associée au minuteur en cours (pour le rappel de fin)
 	const timerStepTextRef = useRef<string>("");
-
-	// Durée de l'étape courante (valeur dérivée, pas besoin d'état)
 	const initialTimeMs = getStepTimeMs(currentStep);
+	const timerModalRef = useRef<HTMLDialogElement>(null);
 
-	// useCallback : référence stable pour pouvoir l'utiliser dans les useEffect
 	const clearTimer = useCallback(() => {
 		if (intervalRef.current) {
 			clearInterval(intervalRef.current);
@@ -63,24 +47,19 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 		}
 	}, []);
 
-	// SYNCHRONISATION : quand l'étape change et que le minuteur ne tourne pas,
-	// on réinitialise l'affichage avec la durée de la nouvelle étape
-	// On mémorise le numéro de la dernière étape synchronisée
 	const lastSyncedStepRef = useRef<number | null>(null);
 
-	// SYNCHRONISATION : uniquement quand l'ÉTAPE change (pas quand on met pause)
 	useEffect(() => {
 		const stepChanged = lastSyncedStepRef.current !== currentStep?.number;
 
-		if (stepChanged && !isRunning) {
+		if (stepChanged && !isEngaged) {
 			lastSyncedStepRef.current = currentStep?.number ?? null;
 			setRemainingTime(initialTimeMs);
 			timerStepTextRef.current = currentStep?.step ?? "";
 			clearTimer();
 		}
-	}, [initialTimeMs, isRunning, currentStep, clearTimer]);
+	}, [initialTimeMs, isEngaged, currentStep, clearTimer]);
 
-	// NETTOYAGE : on coupe l'intervalle au démontage du composant
 	useEffect(() => {
 		return () => clearTimer();
 	}, [clearTimer]);
@@ -94,6 +73,7 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 		if (remainingTime <= 0) return;
 
 		setIsRunning(true);
+		setIsEngaged(true);
 		targetTimeRef.current = Date.now() + remainingTime;
 
 		intervalRef.current = setInterval(() => {
@@ -102,7 +82,9 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 			if (timeLeft <= 0) {
 				setRemainingTime(0);
 				stopTimer();
+				setIsEngaged(false);
 				onTimerEnd?.(timerStepTextRef.current);
+				timerModalRef.current?.showModal();
 			} else {
 				setRemainingTime(timeLeft);
 			}
@@ -119,21 +101,37 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 
 	const handleReset = () => {
 		stopTimer();
+		setIsEngaged(false);
 		setRemainingTime(initialTimeMs);
 	};
 
-	const isPaused =
-		!isRunning && remainingTime > 0 && remainingTime < initialTimeMs;
+	const isPaused = isEngaged && !isRunning;
 
-	// AFFICHAGE CONDITIONNEL : rien si l'étape n'a pas de durée
-	// et qu'aucun minuteur n'est en cours
-	if (initialTimeMs <= 0 && !isRunning) {
+	if (initialTimeMs <= 0 && !isEngaged) {
 		return null;
 	}
 
 	return (
 		<section className="w-full flex justify-center items-center mt-6">
-			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background  font-bold text-base-content">
+			<dialog ref={timerModalRef} className="modal">
+				<div className="modal-box text-base-content border-t-4 border-warning">
+					<h3 className="font-bold text-lg">
+						⏰ Le temps de cuisson est écoulé !
+					</h3>
+					<p className="py-4">{timerStepTextRef.current}</p>
+					<div className="modal-action">
+						<button
+							type="button"
+							className="btn btn-primary"
+							onClick={() => timerModalRef.current?.close()}
+						>
+							OK
+						</button>
+					</div>
+				</div>
+			</dialog>
+
+			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background font-bold text-base-content">
 				<h1 id="display" className="text-center">
 					Minuteur
 				</h1>
