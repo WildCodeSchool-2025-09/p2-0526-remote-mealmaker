@@ -29,7 +29,6 @@ function Home() {
 			previous.filter((item) => item.id !== id),
 		);
 	}
-	console.info(filters);
 	return (
 		<>
 			<Header />
