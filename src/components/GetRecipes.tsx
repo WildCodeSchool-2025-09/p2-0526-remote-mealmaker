@@ -8,7 +8,6 @@ interface GetRecipesProps {
 }
 
 function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
-	console.info(selectedIngredients);
 	const [recipeByIngredients, setRecipeByIngredients] = useState<Recipe[]>([]);
 
 	function fetchRecipeByIngredients(selectedIngredients: Ingredient[]) {
@@ -22,13 +21,16 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 
 		url += `&includeIngredients=${ingredients}`;
 
-		if (filters.diet) {
+		if (filters.diet !== "") {
 			url += `&diet=${filters.diet}`;
 		}
 
-		if (filters.intolerances) {
+		if (filters.intolerances !== "") {
 			url += `&intolerances=${filters.intolerances}`;
 		}
+
+		url += "&addRecipeInformation=true";
+		url += "&number=10";
 
 		fetch(url)
 			.then((response) => response.json())

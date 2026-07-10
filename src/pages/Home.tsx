@@ -10,9 +10,6 @@ import type { Filters, Ingredient, Recipe, } from "../Type2";
 function Home() {
 	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
 	const [filters, setFilters] = useState<Filters>({
-		vegan: false,
-		healthy: false,
-		sport: false,
 		diet: "",
 		intolerances: "",
 	});

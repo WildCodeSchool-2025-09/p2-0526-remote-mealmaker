@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import { useState } from "react";
 import FilterMenu from "./FilterMenu";
 import type { Ingredient, Filters } from "../Type2";
+import type { Dispatch, SetStateAction } from "react";
 
 type QuickIngredient = Ingredient & { label: string };
 
@@ -52,7 +53,8 @@ type AutocompleteResult = {
 
 type SearchBarProps = {
 	onAddIngredient: (ingredient: Ingredient) => void;
-  filters: Filters;
+  	filters: Filters;
+	setFilters: Dispatch<SetStateAction<Filters>>;
 };
 
 function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {

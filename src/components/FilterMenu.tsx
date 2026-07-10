@@ -39,65 +39,17 @@ function FilterMenu({ filters, setFilters }: FilterMenuProps) {
 				{isOpen && (
 					<div>
 						<ul className=" absolute right-0 mt-2 w-[90vw] sm:w-80 max-w-sm p-4 sm:p-5 bg-surface border border-primary/20 rounded-box shadow-xl z-5 space-y-4">
-							<h3 className="font-heading text-lg text-primary font-semibold">
-								Filtres
-							</h3>
-							<hr className="border-base-300" />
 							<li>
-								<label className="label cursor-pointer">
-									<span> Vegan </span>
-									<input
-										type="checkbox"
-										className="checkbox checkbox-secondary"
-										checked={filters.vegan}
-										onChange={(e) =>
-											setFilters({
-												...filters,
-												vegan: e.target.checked,
-											})
-										}
-									/>
-								</label>
-							</li>
-							<li>
-								<label className="label cursor-pointer">
-									<span> Healthy </span>
-									<input
-										type="checkbox"
-										className="checkbox checkbox-secondary"
-										checked={filters.healthy}
-										onChange={(e) =>
-											setFilters({
-												...filters,
-												healthy: e.target.checked,
-											})
-										}
-									/>
-								</label>
-							</li>
-							<li>
-								<label className="label cursor-pointer">
-									<span> Sport </span>
-									<input
-										type="checkbox"
-										className="checkbox checkbox-secondary"
-										checked={filters.sport}
-										onChange={(e) =>
-											setFilters({
-												...filters,
-												sport: e.target.checked,
-											})
-										}
-									/>
-								</label>
-							</li>
-							<hr className="border-base-300" />
-							<li>
-								<p className="font-heading text-lg text-primary font-semibold">
-									Regime
+								<h2 className=" text-center pb-4 font-heading text-lg text-primary font-semibold">
+									Filtres
+								</h2>
+								<hr className="border-base-300" />
+								<p className=" py-4 font-heading text-lg text-primary font-semibold">
+									Régime
 								</p>
+
 								<select
-									className="select select-bordered w-full border-primary/20 focus:outline-none focus:ring-0 focus:shadow-none focus:border-primary"
+									className="select select-bordered w-full border-primary/20"
 									value={filters.diet}
 									onChange={(e) =>
 										setFilters({
@@ -106,17 +58,22 @@ function FilterMenu({ filters, setFilters }: FilterMenuProps) {
 										})
 									}
 								>
-									<option>None</option>
-									<option>Vegetarian</option>
-									<option>Gluten free</option>
+									<option value="">Aucun</option>
+									<option value="vegetarian">Végétarien</option>
+									<option value="vegan">Vegan</option>
+									<option value="gluten free">Sans gluten</option>
+									<option value="ketogenic">Cétogène</option>
+									<option value="pescetarian">Pescétarien</option>
+									<option value="paleo">Paléo</option>
 								</select>
 							</li>
 							<li>
-								<p className="font-heading text-lg text-primary font-semibold">
-									Allergy
+								<p className=" py-4 font-heading text-lg text-primary font-semibold">
+									Intolérances
 								</p>
+
 								<select
-									className="select select-bordered w-full border-primary/20 focus:border-primary"
+									className="select select-bordered w-full border-primary/20"
 									value={filters.intolerances}
 									onChange={(e) =>
 										setFilters({
@@ -125,9 +82,15 @@ function FilterMenu({ filters, setFilters }: FilterMenuProps) {
 										})
 									}
 								>
-									<option>None</option>
-									<option>Lactose</option>
-									<option>Peanuts</option>
+									<option value="">Aucune</option>
+									<option value="dairy">Lactose</option>
+									<option value="egg">Œufs</option>
+									<option value="gluten">Gluten</option>
+									<option value="peanut">Arachides</option>
+									<option value="sesame">Sésame</option>
+									<option value="soy">Soja</option>
+									<option value="tree nut">Fruits à coque</option>
+									<option value="seafood">Fruits de mer</option>
 								</select>
 							</li>
 							<li>
@@ -137,9 +100,6 @@ function FilterMenu({ filters, setFilters }: FilterMenuProps) {
 										className="btn btn-outline btn-secondary"
 										onClick={() => {
 											setFilters({
-												vegan: false,
-												healthy: false,
-												sport: false,
 												diet: "",
 												intolerances: "",
 											});
@@ -160,7 +120,7 @@ function FilterMenu({ filters, setFilters }: FilterMenuProps) {
 						</ul>
 					</div>
 				)}
-			</div >
+			</div>
 		</>
 	);
 }

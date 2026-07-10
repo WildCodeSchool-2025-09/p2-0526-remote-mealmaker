@@ -5,9 +5,6 @@ export interface Ingredient {
 }
 
 export interface Filters {
-    vegan: boolean;
-    healthy: boolean;
-    sport: boolean;
     diet: string;
     intolerances: string;
 }
