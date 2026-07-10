@@ -1,13 +1,13 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
-import type { Recipe } from "./RecipeCard";
-import type { Ingredient } from "../types";
+import type { Filters, Ingredient, Recipe } from "../Type2";
 
-type GetRecipesProps = {
+interface GetRecipesProps {
 	selectedIngredients: Ingredient[];
-};
+	filters: Filters;
+}
 
-function GetRecipes({ selectedIngredients }: GetRecipesProps) {
+function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 	const [recipeByIngredients, setRecipeByIngredients] = useState<Recipe[]>([]);
 
 	function fetchRecipeByIngredients(selectedIngredients: Ingredient[]) {
@@ -17,12 +17,25 @@ function GetRecipes({ selectedIngredients }: GetRecipesProps) {
 			.map((ingredient) => ingredient.name)
 			.join(",");
 
-		fetch(
-			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=${myApiKey}`,
-		)
+		let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${myApiKey}`;
+
+		url += `&includeIngredients=${ingredients}`;
+
+		if (filters.diet !== "") {
+			url += `&diet=${filters.diet}`;
+		}
+
+		if (filters.intolerances !== "") {
+			url += `&intolerances=${filters.intolerances}`;
+		}
+
+		url += "&addRecipeInformation=true";
+		url += "&number=10";
+
+		fetch(url)
 			.then((response) => response.json())
-			.then((data: Recipe[]) => {
-				setRecipeByIngredients(data);
+			.then((data) => {
+				setRecipeByIngredients(data.results);
 				return;
 			});
 	}

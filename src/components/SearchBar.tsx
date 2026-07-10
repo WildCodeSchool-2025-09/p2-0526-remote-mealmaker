@@ -1,6 +1,8 @@
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
-import type { Ingredient } from "../types";
+import FilterMenu from "./FilterMenu";
+import type { Ingredient, Filters } from "../Type2";
+import type { Dispatch, SetStateAction } from "react";
 
 type QuickIngredient = Ingredient & { label: string };
 
@@ -51,9 +53,11 @@ type AutocompleteResult = {
 
 type SearchBarProps = {
 	onAddIngredient: (ingredient: Ingredient) => void;
+  	filters: Filters;
+	setFilters: Dispatch<SetStateAction<Filters>>;
 };
 
-function SearchBar({ onAddIngredient }: SearchBarProps) {
+function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
 
@@ -115,7 +119,7 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				<Menu className="btn mr-2" />
+				<FilterMenu filters={filters} setFilters={setFilters} />
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 
