@@ -105,9 +105,10 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 	};
 
 	const isPaused = isEngaged && !isRunning;
+
 	const handleCloseModal = () => {
 		timerModalRef.current?.close();
-		setIsEngaged(false); // ✅ ON LIBÈRE LE MINUTEUR SEULEMENT ICI
+		setIsEngaged(false);
 	};
 
 	if (initialTimeMs <= 0 && !isEngaged) {
