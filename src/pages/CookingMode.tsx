@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import Navbar from "../components/NavBar";
 import useRecipeById from "../hooks/useRecipeById";
 import QuitButton from "../components/CookingMode/QuitButton";
@@ -8,8 +7,7 @@ import ProgressBar from "../components/CookingMode/ProgressBar";
 import IngredientsView from "../components/CookingMode/IngredientsView";
 import StepNavigation from "../components/CookingMode/StepNavigation";
 import TimerCookModule from "../components/CookingMode/TimerCookModule";
-
-// import testRecipe from "../recipes.model.json";
+import CompletedRecipe from "../components/CookingMode/CompletedRecipe";
 
 function CookingMode() {
 	const { id } = useParams();
@@ -28,25 +26,7 @@ function CookingMode() {
 	}
 
 	if (recipeCompleted) {
-		return (
-			<section className="min-h-screen flex flex-col items-center justify-center gap-6 p-8 text-center">
-				<img
-					src={recipe.image}
-					alt={recipe.title}
-					className="w-48 h-48 rounded-2xl object-cover"
-				/>
-				<div>
-					<h1 className="text-2xl font-heading font-bold">Bon appétit !</h1>
-					<p className="text-lg">Tu as terminé la recette</p>
-				</div>
-				<Link to={`/recipe/${id}`} className="btn btn-primary btn-xl w-full">
-					Revenir à la recette
-				</Link>
-				<Link to="/" className="btn btn-outline btn-primary btn-xl w-full">
-					Retour à l'accueil
-				</Link>
-			</section>
-		);
+		return <CompletedRecipe recipe={recipe} id={id} />;
 	}
 
 	const currentStep = steps[currentStepIndex];
