@@ -82,7 +82,6 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 			if (timeLeft <= 0) {
 				setRemainingTime(0);
 				stopTimer();
-				setIsEngaged(false);
 				onTimerEnd?.(timerStepTextRef.current);
 				timerModalRef.current?.showModal();
 			} else {
@@ -106,6 +105,10 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 	};
 
 	const isPaused = isEngaged && !isRunning;
+	const handleCloseModal = () => {
+		timerModalRef.current?.close();
+		setIsEngaged(false); // ✅ ON LIBÈRE LE MINUTEUR SEULEMENT ICI
+	};
 
 	if (initialTimeMs <= 0 && !isEngaged) {
 		return null;
@@ -123,7 +126,7 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 						<button
 							type="button"
 							className="btn btn-primary"
-							onClick={() => timerModalRef.current?.close()}
+							onClick={handleCloseModal}
 						>
 							OK
 						</button>
