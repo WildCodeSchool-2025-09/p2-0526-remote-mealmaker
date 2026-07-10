@@ -1,7 +1,12 @@
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
+import FilterMenu from "./FilterMenu";
+import type { Ingredient, Filters } from "../Type2";
+import type { Dispatch, SetStateAction } from "react";
 
-const commonIngredients = [
+type QuickIngredient = Ingredient & { label: string };
+
+const commonIngredients: QuickIngredient[] = [
 	{
 		id: 1001,
 		name: "butter",
@@ -40,7 +45,19 @@ const commonIngredients = [
 	},
 ];
 
-function SearchBar({ onAddIngredient }) {
+type AutocompleteResult = {
+	id: number;
+	name: string;
+	image: string;
+};
+
+type SearchBarProps = {
+	onAddIngredient: (ingredient: Ingredient) => void;
+	filters: Filters;
+	setFilters: Dispatch<SetStateAction<Filters>>;
+};
+
+function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
 
@@ -53,7 +70,7 @@ function SearchBar({ onAddIngredient }) {
 			`https://api.spoonacular.com/food/ingredients/autocomplete?query=${query}&metaInformation=true&apiKey=${myApiKey}`,
 		)
 			.then((response) => response.json())
-			.then((results) => {
+			.then((results: AutocompleteResult[]) => {
 				const match = results.find(
 					(item) => item.name.toLowerCase() === query.toLowerCase(),
 				);
@@ -73,13 +90,13 @@ function SearchBar({ onAddIngredient }) {
 			});
 	}
 
-	function handleKeyDown(event) {
+	function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 		if (event.key === "Enter") {
 			handleSearch();
 		}
 	}
 
-	function handleQuickAdd(ingredient) {
+	function handleQuickAdd(ingredient: QuickIngredient) {
 		onAddIngredient({
 			id: ingredient.id,
 			name: ingredient.name,
@@ -102,7 +119,7 @@ function SearchBar({ onAddIngredient }) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				<Menu className="btn mr-2" />
+				<FilterMenu filters={filters} setFilters={setFilters} />
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 
