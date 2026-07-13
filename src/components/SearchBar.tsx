@@ -53,7 +53,7 @@ type AutocompleteResult = {
 
 type SearchBarProps = {
 	onAddIngredient: (ingredient: Ingredient) => void;
-  	filters: Filters;
+	filters: Filters;
 	setFilters: Dispatch<SetStateAction<Filters>>;
 };
 

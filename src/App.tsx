@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Favorite from "./pages/Favorite";
 import Home from "./pages/Home";
 import Recipe from "./pages/Recipe";
-import RecipeLive from "./pages/RecipeLive";
 import ThemePreview from "./pages/ThemePreview";
+import CookingMode from "./pages/CookingMode";
 
 function App() {
 	return (
@@ -11,9 +11,10 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/recipe/:id" element={<Recipe />} />
-				<Route path="/recipelive" element={<RecipeLive />} />
+				<Route path="/recipe/:id/cooking" element={<CookingMode />} />
 				<Route path="/favorite" element={<Favorite />} />
 				<Route path="/themepreview" element={<ThemePreview />} />
+				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		</>
 	);

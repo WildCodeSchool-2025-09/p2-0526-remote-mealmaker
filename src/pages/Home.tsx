@@ -5,10 +5,12 @@ import IngredientsList from "../components/IngredientsList";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
-import type { Filters, Ingredient, Recipe, } from "../Type2";
+import type { Filters, Ingredient, Recipe } from "../Type2";
 
 function Home() {
-	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
+	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
+		[],
+	);
 	const [filters, setFilters] = useState<Filters>({
 		diet: "",
 		intolerances: "",
