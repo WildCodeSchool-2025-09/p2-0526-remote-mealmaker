@@ -1,6 +1,6 @@
 import { Heart, Leaf, Star, TimerIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import type { Recipe } from "../Type2";
+import type { Recipe } from "../types/recipe.types";
 
 type RecipeCardProps = {
 	recipe: Recipe;
