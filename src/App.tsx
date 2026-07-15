@@ -1,11 +1,21 @@
-import "./App.css";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Favorite from "./pages/Favorite";
+import Home from "./pages/Home";
+import Recipe from "./pages/Recipe";
+import ThemePreview from "./pages/ThemePreview";
+import CookingMode from "./pages/CookingMode";
 
 function App() {
-	const name = "toto";
-	const text = "Welcome";
 	return (
 		<>
-			{text} {name}
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/recipe/:id" element={<Recipe />} />
+				<Route path="/recipe/:id/cooking" element={<CookingMode />} />
+				<Route path="/favorite" element={<Favorite />} />
+				<Route path="/themepreview" element={<ThemePreview />} />
+				<Route path="*" element={<Navigate to="/" replace />} />
+			</Routes>
 		</>
 	);
 }

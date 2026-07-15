@@ -1,6 +1,14 @@
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css";
+import { FavoriteProvider } from "./components/contexts/FavoriteContext";
 
-createRoot(document.getElementById('root') || document.body)
-.render(<App />);
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+	<BrowserRouter>
+		<FavoriteProvider>
+			<App />
+		</FavoriteProvider>
+	</BrowserRouter>,
+);

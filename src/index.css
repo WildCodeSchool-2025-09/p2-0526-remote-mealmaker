@@ -1,14 +1,99 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@import "./styles/fonts.css";
+@plugin "daisyui";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+	--font-heading: "Poppins", sans-serif;
+	--font-body: "Inter", sans-serif;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	--color-brand: #e67e52;
+	--color-brand-hover: #d96a3b;
+	--color-sage: #7a9e7e;
+	--color-leaf: #5e8c61;
+	--color-sky: #b3ebf2;
+	--color-alert: #d9534f;
+	--color-background: #f8f6f2;
+	--color-surface: #ffffff;
+	--color-text: #2d2d2d;
+	--color-text-muted: #6b6b6b;
+}
+
+/* biome-ignore lint/correctness/noUnknownProperty */
+@plugin "daisyui/theme" {
+	/* biome-ignore lint/correctness/noUnknownProperty */
+	name: "mealmaker";
+	/* biome-ignore lint/correctness/noUnknownProperty */
+	default: true;
+	/* biome-ignore lint/correctness/noUnknownProperty */
+	prefersdark: false;
+	color-scheme: light;
+
+	--color-primary: var(--color-brand);
+	--color-primary-content: #ffffff;
+
+	--color-secondary: var(--color-sage);
+	--color-secondary-content: #ffffff;
+
+	--color-accent: var(--color-brand-hover);
+	--color-accent-content: #ffffff;
+
+	--color-neutral: var(--color-text);
+	--color-neutral-content: var(--color-surface);
+
+	--color-base-100: var(--color-background);
+	--color-base-200: #f2f0ec;
+	--color-base-300: #e8e5df;
+	--color-base-content: var(--color-text);
+
+	--color-success: var(--color-leaf);
+	--color-success-content: #ffffff;
+
+	--color-warning: #e6a23c;
+	--color-warning-content: #ffffff;
+
+	--color-error: var(--color-alert);
+	--color-error-content: #ffffff;
+
+	--color-info: var(--color-sky);
+	--color-info-content: #1a3c40;
+
+	--color-muted: var(--color-text-muted);
+
+	--radius-selector: 0.5rem;
+	--radius-field: 0.75rem;
+	--radius-box: 1rem;
+
+	--border: 1px;
+	--depth: 1;
+	--noise: 0;
+}
+
+@layer base {
+	body {
+		font-family: var(--font-body);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-heading);
+	}
+}
+
+@utility font-heading {
+	font-family: var(--font-heading);
+}
+
+@utility font-body {
+	font-family: var(--font-body);
+}
+
+.select,
+.select:focus,
+.select:focus-visible {
+	outline: transparent !important;
+	box-shadow: none !important;
 }
