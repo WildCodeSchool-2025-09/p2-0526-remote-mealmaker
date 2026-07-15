@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import { useState } from "react";
-import FilterMenu from "./FilterMenu";
-import type { Ingredient, Filters } from "../Type2";
+import RecipeFilters from "./RecipeFilters";
+import type { Ingredient, Filters } from "../types/recipe.types";
 import type { Dispatch, SetStateAction } from "react";
 
 type QuickIngredient = Ingredient & { label: string };
@@ -10,37 +10,37 @@ const commonIngredients: QuickIngredient[] = [
 	{
 		id: 1001,
 		name: "butter",
-		label: "Beurre",
+		label: "Butter",
 		image: "https://img.spoonacular.com/ingredients_100x100/butter-sliced.jpg",
 	},
 	{
 		id: 4053,
 		name: "olive oil",
-		label: "Huile d'olive",
+		label: "Olive oil",
 		image: "https://img.spoonacular.com/ingredients_100x100/olive-oil.jpg",
 	},
 	{
 		id: 1077,
 		name: "milk",
-		label: "Lait",
+		label: "Milk",
 		image: "https://img.spoonacular.com/ingredients_100x100/milk.png",
 	},
 	{
 		id: 19335,
 		name: "sugar",
-		label: "Sucre",
+		label: "Sugar",
 		image: "https://img.spoonacular.com/ingredients_100x100/sugar-in-bowl.png",
 	},
 	{
 		id: 1123,
 		name: "egg",
-		label: "Œufs",
+		label: "Egg",
 		image: "https://img.spoonacular.com/ingredients_100x100/egg.png",
 	},
 	{
 		id: 20081,
 		name: "wheat flour",
-		label: "Farine de blé",
+		label: "Wheat flour",
 		image: "https://img.spoonacular.com/ingredients_100x100/flour.png",
 	},
 ];
@@ -105,21 +105,21 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 	}
 
 	return (
-		<section className="w-full flex flex-col gap-1 mt-4">
-			<div className="w-full flex justify-between items-center gap-2">
+		<section className="w-full flex flex-col gap-1">
+			<div className="w-full flex flex-col justify-between items-center gap-2">
 				<label className="input w-full bg-surface border border-solid border-primary">
 					<Search />
 					<input
 						type="search"
 						required
-						placeholder="Recherche un ingrédient..."
+						placeholder="Search ingredients..."
 						className="input"
 						value={query}
 						onChange={(event) => setQuery(event.target.value)}
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				<FilterMenu filters={filters} setFilters={setFilters} />
+				
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 
@@ -137,6 +137,7 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 					</li>
 				))}
 			</ul>
+			<RecipeFilters filters={filters} setFilters={setFilters} />
 		</section>
 	);
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
-import type { Filters, Ingredient, Recipe } from "../Type2";
+import type { Filters, Ingredient, Recipe } from "../types/recipe.types";
 
 interface GetRecipesProps {
 	selectedIngredients: Ingredient[];
@@ -25,8 +25,8 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 			url += `&diet=${filters.diet}`;
 		}
 
-		if (filters.intolerances !== "") {
-			url += `&intolerances=${filters.intolerances}`;
+		if (filters.intolerances.length > 0) {
+			url += `&intolerances=${filters.intolerances.join(",")}`;
 		}
 
 		url += "&addRecipeInformation=true";
@@ -47,7 +47,7 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 				className="btn btn-block btn-primary py-8 text-xl"
 				onClick={() => fetchRecipeByIngredients(selectedIngredients)}
 			>
-				Rechercher la recette !
+				Search your recipe !
 			</button>
 
 			{recipeByIngredients.map((recipe) => (
