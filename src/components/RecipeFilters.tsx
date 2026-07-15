@@ -31,7 +31,7 @@ const intoleranceOptions = [
 function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 	const [dietOpen, setDietOpen] = useState(false);
 	const [intolerancesOpen, setIntolerancesOpen] = useState(false);
-	
+
 	function toggleIntolerance(value: string) {
 		if (filters.intolerances.includes(value)) {
 			setFilters({
@@ -72,11 +72,10 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 									})
 								}
 								className={`btn btn-sm rounded-full transition-all
-								${
-									filters.diet === diet.value
+								${filters.diet === diet.value
 										? "btn-primary"
 										: "btn-outline btn-primary"
-								}`}
+									}`}
 							>
 								{diet.label}
 							</button>
@@ -108,11 +107,10 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 								type="button"
 								onClick={() => toggleIntolerance(option.value)}
 								className={`btn btn-sm rounded-full transition-all
-								${
-									filters.intolerances.includes(option.value)
+								${filters.intolerances.includes(option.value)
 										? "btn-secondary"
 										: "btn-outline btn-secondary"
-								}`}
+									}`}
 							>
 								{option.label}
 							</button>
