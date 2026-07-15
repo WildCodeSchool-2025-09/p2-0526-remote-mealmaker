@@ -13,6 +13,11 @@ export interface Ingredient {
 	image: string;
 }
 
+export interface Filters {
+    diet: string;
+    intolerances: string[];
+}
+
 export interface RecipeStep {
 	number: number;
 	step: string;

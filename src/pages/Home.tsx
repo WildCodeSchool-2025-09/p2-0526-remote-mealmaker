@@ -5,7 +5,7 @@ import IngredientsList from "../components/IngredientsList";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
-import type { Filters, Ingredient, Recipe } from "../Type2";
+import type { Filters, Ingredient } from "../types/recipe.types";
 
 function Home() {
 	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
@@ -13,7 +13,7 @@ function Home() {
 	);
 	const [filters, setFilters] = useState<Filters>({
 		diet: "",
-		intolerances: "",
+		intolerances: [],
 	});
 
 	function addIngredient(ingredient: Ingredient) {
@@ -38,6 +38,7 @@ function Home() {
 					filters={filters}
 					setFilters={setFilters}
 				/>
+				<hr className="border-base-300" />
 				<IngredientsList
 					ingredients={selectedIngredients}
 					onRemoveIngredient={removeIngredient}

@@ -1,7 +1,10 @@
 import { Leaf, Star, TimerIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import type { Recipe } from "../types/recipe.types";
+<<<<<<< HEAD
 import FavoriteButton from "./FavoriteButton";
+=======
+>>>>>>> dev
 
 type RecipeCardProps = {
 	recipe: Recipe;
