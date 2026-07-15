@@ -119,9 +119,7 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 		<section className="w-full flex justify-center items-center mt-6">
 			<dialog ref={timerModalRef} className="modal">
 				<div className="modal-box text-base-content border-t-4 border-warning">
-					<h3 className="font-bold text-lg">
-						⏰ Le temps de cuisson est écoulé !
-					</h3>
+					<h3 className="font-bold text-lg">⏰ Cooking time is up !</h3>
 					<p className="py-4">{timerStepTextRef.current}</p>
 					<div className="modal-action">
 						<button
@@ -137,7 +135,7 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 
 			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background font-bold text-base-content">
 				<h1 id="display" className="text-center">
-					Minuteur
+					Timer
 				</h1>
 				<p className="text-center">{formatTime(remainingTime)}</p>
 				<div className="w-full flex justify-around gap-2">
@@ -147,14 +145,14 @@ function TimerCookModule({ currentStep, onTimerEnd }: TimerCookModuleProps) {
 						disabled={remainingTime === 0}
 						className={`btn btn-sm ${isRunning ? "btn-warning" : "btn-success"} ${isPaused ? "animate-pulse" : ""}`}
 					>
-						{isRunning ? "Pause" : isPaused ? "Reprendre" : "Démarrer"}
+						{isRunning ? "Pause" : isPaused ? "Resume" : "Start"}
 					</button>
 					<button
 						onClick={handleReset}
 						type="button"
 						className="btn btn-sm btn-error"
 					>
-						Réinitialiser
+						Reset
 					</button>
 				</div>
 			</article>

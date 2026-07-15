@@ -11,7 +11,7 @@ function Favorite() {
 			<>
 				<Header />
 				<p className="text-center text-text-muted mt-10">
-					Aucune recette favorite pour l'instant.
+					No favorite for now.
 				</p>
 				<Navbar />
 			</>

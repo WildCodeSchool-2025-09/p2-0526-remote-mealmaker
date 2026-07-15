@@ -45,7 +45,7 @@ export default function ThemePreview() {
 		>
 			<div className="mx-auto max-w-5xl space-y-10 p-8">
 				<header className="space-y-1">
-					<h1 className="font-heading text-3xl font-bold">Thème MealMaker</h1>
+					<h1 className="font-heading text-3xl font-bold">MealMaker Theme</h1>
 					<p className="text-base-content/70">
 						Aperçu des couleurs, du texte de contraste et des composants. Titres
 						en Poppins, corps en Inter.
