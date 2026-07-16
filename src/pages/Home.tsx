@@ -51,7 +51,6 @@ function Home() {
 			<footer>
 				<p className="m-4 text-center text-text-muted">Copyright &copy; 2026</p>
 			</footer>
-			<div className="w-full h-24"> </div>
 			<Navbar />
 		</>
 	);
