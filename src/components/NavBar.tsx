@@ -6,7 +6,6 @@ import TimerCookModule from "./CookingMode/TimerCookModule";
 function Navbar() {
 	const { pathname } = useLocation();
 	const isCooking = pathname.endsWith("/cooking");
-	console.info(isCooking);
 
 	return (
 		<>

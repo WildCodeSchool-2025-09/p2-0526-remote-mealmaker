@@ -23,7 +23,11 @@ function Favorite() {
 			<Header />
 			<section className="flex flex-col p-8 gap-4">
 				{favorites.map((recipe) => (
-					<RecipeCard key={recipe.id} recipe={recipe} />
+					<RecipeCard
+						key={recipe.id}
+						recipe={recipe}
+						filters={{ diet: "", intolerances: [] }}
+					/>
 				))}
 			</section>
 			<Navbar />
