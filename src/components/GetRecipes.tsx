@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import RecipeCard from "./RecipeCard";
-import type { Filters, Ingredient, Recipe } from "../types/recipe.types";
+import { useSearch } from "./contexts/SearchContext";
+import type { Filters, Ingredient } from "../types/recipe.types";
 
 interface GetRecipesProps {
 	selectedIngredients: Ingredient[];
@@ -8,37 +9,55 @@ interface GetRecipesProps {
 }
 
 function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
-	const [recipeByIngredients, setRecipeByIngredients] = useState<Recipe[]>([]);
+	const { recipes, setRecipes } = useSearch();
+	const isFirstRender = useRef(true);
 
-	function fetchRecipeByIngredients(selectedIngredients: Ingredient[]) {
-		const myApiKey = import.meta.env.VITE_API_URL;
+	const fetchRecipeByIngredients = useCallback(
+		(selectedIngredients: Ingredient[]) => {
+			const myApiKey = import.meta.env.VITE_API_URL;
 
-		const ingredients = selectedIngredients
-			.map((ingredient) => ingredient.name)
-			.join(",");
+			const ingredients = selectedIngredients
+				.map((ingredient) => ingredient.name)
+				.join(",");
 
-		let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${myApiKey}`;
+			let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${myApiKey}`;
 
-		url += `&includeIngredients=${ingredients}`;
+			url += `&includeIngredients=${ingredients}`;
 
-		if (filters.diet !== "") {
-			url += `&diet=${filters.diet}`;
+			if (filters.diet !== "") {
+				url += `&diet=${filters.diet}`;
+			}
+
+			if (filters.intolerances.length > 0) {
+				url += `&intolerances=${filters.intolerances.join(",")}`;
+			}
+
+			url += "&addRecipeInformation=true";
+			url += "&number=10";
+
+			fetch(url)
+				.then((response) => response.json())
+				.then((data) => {
+					setRecipes(data.results);
+					return;
+				});
+		},
+		[filters, setRecipes],
+	);
+
+	useEffect(() => {
+		if (isFirstRender.current) {
+			isFirstRender.current = false;
+			return;
 		}
 
-		if (filters.intolerances.length > 0) {
-			url += `&intolerances=${filters.intolerances.join(",")}`;
+		if (selectedIngredients.length === 0) {
+			setRecipes([]);
+			return;
 		}
 
-		url += "&addRecipeInformation=true";
-		url += "&number=10";
-
-		fetch(url)
-			.then((response) => response.json())
-			.then((data) => {
-				setRecipeByIngredients(data.results);
-				return;
-			});
-	}
+		fetchRecipeByIngredients(selectedIngredients);
+	}, [selectedIngredients, fetchRecipeByIngredients, setRecipes]);
 
 	return (
 		<>
@@ -50,7 +69,7 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 				Search your recipe !
 			</button>
 
-			{recipeByIngredients.map((recipe) => (
+			{recipes.map((recipe) => (
 				<RecipeCard
 					key={recipe.id}
 					recipe={recipe}

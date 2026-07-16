@@ -4,31 +4,16 @@ import Hero from "../components/Hero";
 import IngredientsList from "../components/IngredientsList";
 import SearchBar from "../components/SearchBar";
 import Navbar from "../components/NavBar";
-import { useState } from "react";
-import type { Filters, Ingredient } from "../types/recipe.types";
+import { useSearch } from "../components/contexts/SearchContext";
 
 function Home() {
-	const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(
-		[],
-	);
-	const [filters, setFilters] = useState<Filters>({
-		diet: "",
-		intolerances: [],
-	});
-
-	function addIngredient(ingredient: Ingredient) {
-		setSelectedIngredients((previous) => {
-			const alreadyExists = previous.some((item) => item.id === ingredient.id);
-			if (alreadyExists) return previous;
-			return [...previous, ingredient];
-		});
-	}
-
-	function removeIngredient(id: number) {
-		setSelectedIngredients((previous) =>
-			previous.filter((item) => item.id !== id),
-		);
-	}
+	const {
+		selectedIngredients,
+		addIngredient,
+		removeIngredient,
+		filters,
+		setFilters,
+	} = useSearch();
 
 	return (
 		<>

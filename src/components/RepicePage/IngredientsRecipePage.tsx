@@ -1,5 +1,6 @@
 import type Recipe from "../../types/recipe.types";
 import type { Ingredient } from "../../types/recipe.types";
+import IngredientImage from "./IngredientImage";
 
 type IngredientsRecipePageProps = {
 	recipe: Recipe;
@@ -21,11 +22,7 @@ function IngredientsRecipePage({ recipe }: IngredientsRecipePageProps) {
 			<ul className="flex flex-wrap gap-4">
 				{ingredients.map((ingredient: Ingredient) => (
 					<li key={ingredient.id} className="flex flex-col items-center w-16">
-						<img
-							src={`https://img.spoonacular.com/ingredients_100x100/${ingredient.image}`}
-							alt={ingredient.name}
-							className="size-12 rounded-full object-cover bg-surface"
-						/>
+						<IngredientImage image={ingredient.image} alt={ingredient.name} />
 						<p className="text-xs text-text-muted text-center">
 							{ingredient.name}
 						</p>
