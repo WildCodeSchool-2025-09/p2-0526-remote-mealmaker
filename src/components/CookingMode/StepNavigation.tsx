@@ -29,14 +29,14 @@ function StepNavigation({
 				onClick={onPrevious}
 				disabled={currentStepIndex === 0}
 			>
-				Précédent
+				Previous
 			</button>
 			<button
 				type="button"
 				className="btn btn-primary shadow-xl/20 btn-xl flex-1"
 				onClick={handleNextOrFinish}
 			>
-				{isLastStep ? "Terminer" : "Suivant"}
+				{isLastStep ? "Finish" : "Next"}
 			</button>
 		</article>
 	);

@@ -18,11 +18,11 @@ function CookingMode() {
 	const steps = recipe?.analyzedInstructions[0]?.steps ?? [];
 
 	if (!recipe) {
-		return <p>Chargement...</p>;
+		return <p>Loading...</p>;
 	}
 
 	if (steps.length === 0) {
-		return <p>Le mode cuisine n'est pas disponible pour cette recette.</p>;
+		return <p>Cooking mode is not available for this recipe.</p>;
 	}
 
 	if (recipeCompleted) {

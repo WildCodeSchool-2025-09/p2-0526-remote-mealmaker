@@ -31,7 +31,7 @@ const intoleranceOptions = [
 function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 	const [dietOpen, setDietOpen] = useState(false);
 	const [intolerancesOpen, setIntolerancesOpen] = useState(false);
-
+	
 	function toggleIntolerance(value: string) {
 		if (filters.intolerances.includes(value)) {
 			setFilters({
@@ -48,7 +48,6 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 
 	return (
 		<section className="mt-3 flex flex-col gap-4">
-			{/* Diet */}
 			<div className="border-b border-base-300 pb-2">
 				<button
 					type="button"
@@ -83,8 +82,6 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 					</div>
 				)}
 			</div>
-
-			{/* Intolerances */}
 			<div>
 				<button
 					type="button"

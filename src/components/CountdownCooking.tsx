@@ -85,7 +85,7 @@ function CountdownCooking({
 		<>
 			<article className="w-auto flex justify-center flex-col gap-2 p-4 border-2 border-primary rounded-2xl bg-background text-primary">
 				<h1 id="display" className="text-center">
-					Minuteur
+					Timer
 				</h1>
 				<p className="text-center">{formatTime(remainingTime)}</p>
 				<div className="w-full flex justify-around gap-2">
@@ -95,14 +95,14 @@ function CountdownCooking({
 						disabled={remainingTime === 0}
 						className={`btn btn-sm ${isRunning ? "btn-warning" : "btn-success"} ${isPaused ? "animate-pulse" : ""}`}
 					>
-						{isRunning ? "Pause" : isPaused ? "Reprendre" : "Démarrer"}
+						{isRunning ? "Pause" : isPaused ? "Resume" : "Start"}
 					</button>
 					<button
 						onClick={handleReset}
 						type="button"
 						className="btn btn-sm btn-error"
 					>
-						Réinitialiser
+						Reset
 					</button>
 				</div>
 			</article>
