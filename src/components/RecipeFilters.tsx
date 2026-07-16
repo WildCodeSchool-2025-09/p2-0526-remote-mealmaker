@@ -48,7 +48,6 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 
 	return (
 		<section className="mt-3 flex flex-col gap-4">
-			{/* Diet */}
 			<div className="border-b border-base-300 pb-2">
 				<button
 					type="button"
@@ -72,11 +71,10 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 									})
 								}
 								className={`btn btn-sm rounded-full transition-all
-								${
-									filters.diet === diet.value
+								${filters.diet === diet.value
 										? "btn-primary"
 										: "btn-outline btn-primary"
-								}`}
+									}`}
 							>
 								{diet.label}
 							</button>
@@ -84,8 +82,6 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 					</div>
 				)}
 			</div>
-
-			{/* Intolerances */}
 			<div>
 				<button
 					type="button"
@@ -108,11 +104,10 @@ function RecipeFilters({ filters, setFilters }: RecipeFiltersProps) {
 								type="button"
 								onClick={() => toggleIntolerance(option.value)}
 								className={`btn btn-sm rounded-full transition-all
-								${
-									filters.intolerances.includes(option.value)
+								${filters.intolerances.includes(option.value)
 										? "btn-secondary"
 										: "btn-outline btn-secondary"
-								}`}
+									}`}
 							>
 								{option.label}
 							</button>
