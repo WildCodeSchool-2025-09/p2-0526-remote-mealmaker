@@ -52,9 +52,7 @@ function CookingMode() {
 				/>
 
 				<IngredientsView currentStep={currentStep} />
-
-				<TimerCookModule currentStep={currentStep} />
-
+			
 				<p className="text-lg leading-relaxed mt-4">{currentStep.step}</p>
 			</article>
 
