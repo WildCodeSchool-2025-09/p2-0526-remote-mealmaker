@@ -4,7 +4,7 @@ import type { IngredientsListProps } from "../types/recipe.types";
 function IngredientsList({ ingredients, onRemoveIngredient }: IngredientsListProps) {
 	return (
 		<article className=" flex flex-wrap justify-center gap-2 p-2 rounded-box border  border-solid border-primary bg-surface">
-			<p className="w-full text-sage font-bold">Ma liste actuelle :</p>
+			<p className="w-full text-sage font-bold">My list :</p>
 			{ingredients.map((ingredient) => (
 				<button
 					type="button"

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import RecipeCard from "./RecipeCard";
-import type { Ingredient, Recipe } from "../types/recipe.types";
+import type { Filters, Ingredient, Recipe } from "../types/recipe.types";
 
-type GetRecipesProps = {
+interface GetRecipesProps {
 	selectedIngredients: Ingredient[];
-};
+	filters: Filters;
+}
 
-function GetRecipes({ selectedIngredients }: GetRecipesProps) {
+function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 	const [recipeByIngredients, setRecipeByIngredients] = useState<Recipe[]>([]);
 
 	function fetchRecipeByIngredients(selectedIngredients: Ingredient[]) {
@@ -16,12 +17,25 @@ function GetRecipes({ selectedIngredients }: GetRecipesProps) {
 			.map((ingredient) => ingredient.name)
 			.join(",");
 
-		fetch(
-			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=${myApiKey}`,
-		)
+		let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${myApiKey}`;
+
+		url += `&includeIngredients=${ingredients}`;
+
+		if (filters.diet !== "") {
+			url += `&diet=${filters.diet}`;
+		}
+
+		if (filters.intolerances.length > 0) {
+			url += `&intolerances=${filters.intolerances.join(",")}`;
+		}
+
+		url += "&addRecipeInformation=true";
+		url += "&number=10";
+
+		fetch(url)
 			.then((response) => response.json())
-			.then((data: Recipe[]) => {
-				setRecipeByIngredients(data);
+			.then((data) => {
+				setRecipeByIngredients(data.results);
 				return;
 			});
 	}
@@ -33,11 +47,15 @@ function GetRecipes({ selectedIngredients }: GetRecipesProps) {
 				className="btn btn-block btn-primary py-8 text-xl"
 				onClick={() => fetchRecipeByIngredients(selectedIngredients)}
 			>
-				Rechercher la recette !
+				Search your recipe !
 			</button>
 
 			{recipeByIngredients.map((recipe) => (
-				<RecipeCard key={recipe.id} recipe={recipe} />
+				<RecipeCard
+					key={recipe.id}
+					recipe={recipe}
+					filters={filters}
+				/>
 			))}
 		</>
 	);

@@ -90,3 +90,17 @@
 @utility font-body {
 	font-family: var(--font-body);
 }
+
+.select,
+.select:focus,
+.select:focus-visible {
+	outline: transparent !important;
+	box-shadow: none !important;
+}
+
+.input:focus,
+.input:focus-visible,
+.input:focus-within {
+	outline: none !important;
+	box-shadow: none !important;
+}

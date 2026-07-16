@@ -13,7 +13,12 @@ export interface Ingredient {
 	image: string;
 }
 
-export interface Step {
+export interface Filters {
+    diet: string;
+    intolerances: string[];
+}
+
+export interface RecipeStep {
 	number: number;
 	step: string;
 	length?: { number: number; unit: string };
@@ -34,7 +39,5 @@ export interface IngredientsListProps {
 }
 
 export interface AnalyzedInstruction {
-	steps: Step[];
+	steps: RecipeStep[];
 }
-
-export default Recipe

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import type RecipeType from "../types/recipe.types";
+import type { Recipe } from "../types/recipe.types";
 
-
-function useRecipeById(id: string | undefined) {
-	const [recipe, setRecipe] = useState<RecipeType | null>(null);
+function useRecipeById(id: number | undefined) {
+	const [recipe, setRecipe] = useState<Recipe | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 

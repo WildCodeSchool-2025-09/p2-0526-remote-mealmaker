@@ -1,47 +1,61 @@
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState } from "react";
-import type { Ingredient, SearchBarProps } from "../types/recipe.types";
+import RecipeFilters from "./RecipeFilters";
+import type { Ingredient, Filters } from "../types/recipe.types";
+import type { Dispatch, SetStateAction } from "react";
 
 const commonIngredients = [
 	{
 		id: 1001,
 		name: "butter",
-		label: "Beurre",
+		label: "Butter",
 		image: "https://img.spoonacular.com/ingredients_100x100/butter-sliced.jpg",
 	},
 	{
 		id: 4053,
 		name: "olive oil",
-		label: "Huile d'olive",
+		label: "Olive oil",
 		image: "https://img.spoonacular.com/ingredients_100x100/olive-oil.jpg",
 	},
 	{
 		id: 1077,
 		name: "milk",
-		label: "Lait",
+		label: "Milk",
 		image: "https://img.spoonacular.com/ingredients_100x100/milk.png",
 	},
 	{
 		id: 19335,
 		name: "sugar",
-		label: "Sucre",
+		label: "Sugar",
 		image: "https://img.spoonacular.com/ingredients_100x100/sugar-in-bowl.png",
 	},
 	{
 		id: 1123,
 		name: "egg",
-		label: "Œufs",
+		label: "Egg",
 		image: "https://img.spoonacular.com/ingredients_100x100/egg.png",
 	},
 	{
 		id: 20081,
 		name: "wheat flour",
-		label: "Farine de blé",
+		label: "Wheat flour",
 		image: "https://img.spoonacular.com/ingredients_100x100/flour.png",
 	},
 ];
 
-function SearchBar({ onAddIngredient }: SearchBarProps) {
+type AutocompleteResult = {
+	id: number;
+	name: string;
+	image: string;
+};
+
+type SearchBarProps = {
+	onAddIngredient: (ingredient: Ingredient) => void;
+	filters: Filters;
+	setFilters: Dispatch<SetStateAction<Filters>>;
+};
+
+function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
 
@@ -56,11 +70,12 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 			.then((response) => response.json())
 			.then((results) => {
 				const match = results.find(
-					(item:{name:string}) => item.name.toLowerCase() === query.toLowerCase(),
+					(item: AutocompleteResult) =>
+						item.name.toLowerCase() === query.toLowerCase(),
 				);
 
 				if (!match) {
-					setError("Ingrédient introuvable");
+					setError("IngrÃ©dient introuvable");
 					return;
 				}
 
@@ -74,13 +89,13 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 			});
 	}
 
-	function handleKeyDown(event:{key: string}) {
+	function handleKeyDown(event: { key: string }) {
 		if (event.key === "Enter") {
 			handleSearch();
 		}
 	}
 
-	function handleQuickAdd(ingredient:Ingredient) {
+	function handleQuickAdd(ingredient: Ingredient) {
 		onAddIngredient({
 			id: ingredient.id,
 			name: ingredient.name,
@@ -89,21 +104,20 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 	}
 
 	return (
-		<section className="w-full flex flex-col gap-1 mt-4">
-			<div className="w-full flex justify-between items-center gap-2">
+		<section className="w-full flex flex-col gap-1">
+			<div className="w-full flex flex-col justify-between items-center gap-2">
 				<label className="input w-full bg-surface border border-solid border-primary">
 					<Search />
 					<input
 						type="search"
 						required
-						placeholder="Recherche un ingrédient..."
+						placeholder="Search ingredients..."
 						className="input"
 						value={query}
 						onChange={(event) => setQuery(event.target.value)}
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				<Menu className="btn mr-2" />
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 
@@ -121,6 +135,7 @@ function SearchBar({ onAddIngredient }: SearchBarProps) {
 					</li>
 				))}
 			</ul>
+			<RecipeFilters filters={filters} setFilters={setFilters} />
 		</section>
 	);
 }
