@@ -1,16 +1,14 @@
 import { Leaf, Star, TimerIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import type { Recipe } from "../types/recipe.types";
-<<<<<<< HEAD
-=======
+import type { Filters, Recipe } from "../types/recipe.types";
 import FavoriteButton from "./FavoriteButton";
->>>>>>> main
 
 type RecipeCardProps = {
 	recipe: Recipe;
+	filters: Filters;
 };
 
-function RecipeCard({ recipe }: RecipeCardProps) {
+function RecipeCard({ recipe, filters }: RecipeCardProps) {
 	return (
 		<section className=" mt-10 w-full max-w-sm mx-auto ">
 			<NavLink to={`/recipe/${recipe.id}`} className="flex flex-col">
@@ -22,10 +20,28 @@ function RecipeCard({ recipe }: RecipeCardProps) {
 					/>
 				</div>
 				<article className="w-full flex flex-col p-4 border rounded-b-box bg-surface border-primary">
-					<div className="w-full flex justify-around py-4">
-						<Leaf className="text-success" />
-						<Star className="text-amber-300" />
+					<div className="flex justify-between items-center py-4">
+						<div className="flex items-center gap-1">
+							<Star size={20} className="text-amber-300 fill-amber-300" />
+							<p className="text-amber-300 text-sm font-medium">
+								4.5/5
+							</p>
+						</div>
+
 						<FavoriteButton recipe={recipe} />
+					</div>
+					<div className="my-2 flex flex-wrap gap-1">
+						{filters.diet && (
+							<span className="badge badge-primary badge-sm">
+								{filters.diet}
+							</span>
+						)}
+						{filters.intolerances.map((item) => (
+							<span key={item} className="badge badge-secondary badge-sm">
+								{item}
+							</span>
+						))}
+
 					</div>
 					<h3 className="pb-4 font-bold text-xl sm:text-2xl ">
 						{recipe.title}

@@ -51,7 +51,11 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 			</button>
 
 			{recipeByIngredients.map((recipe) => (
-				<RecipeCard key={recipe.id} recipe={recipe} />
+				<RecipeCard
+					key={recipe.id}
+					recipe={recipe}
+					filters={filters}
+				/>
 			))}
 		</>
 	);

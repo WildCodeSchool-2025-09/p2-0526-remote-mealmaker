@@ -97,3 +97,10 @@
 	outline: transparent !important;
 	box-shadow: none !important;
 }
+
+.input:focus,
+.input:focus-visible,
+.input:focus-within {
+	outline: none !important;
+	box-shadow: none !important;
+}

@@ -107,7 +107,7 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 	return (
 		<section className="w-full flex flex-col gap-1">
 			<div className="w-full flex flex-col justify-between items-center gap-2">
-				<label className="input w-full bg-surface border border-solid border-primary">
+				<label className="input w-full bg-surface border border-primary focus-within:border-primary">
 					<Search />
 					<input
 						type="search"
@@ -119,7 +119,7 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				
+
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 
