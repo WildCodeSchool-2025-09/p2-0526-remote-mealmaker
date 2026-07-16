@@ -12,7 +12,7 @@ function ProgressBar({
 	return (
 		<>
 			<p className="mt-8 text-xl font-bold">
-				Étape {currentStep.number} / {steps.length}
+				Step {currentStep.number} / {steps.length}
 			</p>
 			<progress
 				className="progress w-full mt-2 mb-8 [&::-webkit-progress-bar]:bg-neutral-content/20 [&::-webkit-progress-value]:bg-neutral-content [&::-moz-progress-bar]:bg-neutral-content"

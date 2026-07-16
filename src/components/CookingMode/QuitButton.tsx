@@ -12,13 +12,13 @@ function QuitButton({ id }: { id: string | undefined }) {
 				className="btn btn-primary self-end mb-4 py-5"
 				onClick={() => quitModalRef.current?.showModal()}
 			>
-				Quitter le mode cuisine
+				Quit Cooking mode
 			</button>
 			<dialog ref={quitModalRef} className="modal">
 				<div className="modal-box text-base-content">
-					<h3 className="font-bold text-lg">Quitter le mode cuisine ?</h3>
+					<h3 className="font-bold text-lg">Quit cooking mode ?</h3>
 					<p className="py-4">
-						Ta progression dans les étapes ne sera pas conservée.
+						Your progress through the steps will not be saved.
 					</p>
 					<div className="modal-action">
 						<button
@@ -26,14 +26,14 @@ function QuitButton({ id }: { id: string | undefined }) {
 							className="btn"
 							onClick={() => quitModalRef.current?.close()}
 						>
-							Annuler
+							Cancel
 						</button>
 						<button
 							type="button"
 							className="btn btn-error"
 							onClick={() => navigate(`/recipe/${id}`)}
 						>
-							Quitter
+							Quit
 						</button>
 					</div>
 				</div>

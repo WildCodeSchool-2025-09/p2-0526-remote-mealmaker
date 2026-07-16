@@ -1,6 +1,7 @@
-import { Heart, Leaf, Star, TimerIcon } from "lucide-react";
+import { Leaf, Star, TimerIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import type { Recipe } from "../types/recipe.types";
+import FavoriteButton from "./FavoriteButton";
 
 type RecipeCardProps = {
 	recipe: Recipe;
@@ -21,7 +22,7 @@ function RecipeCard({ recipe }: RecipeCardProps) {
 					<div className="w-full flex justify-around py-4">
 						<Leaf className="text-success" />
 						<Star className="text-amber-300" />
-						<Heart className=" self-end text-primary" />
+						<FavoriteButton recipe={recipe} />
 					</div>
 					<h3 className="pb-4 font-bold text-xl sm:text-2xl ">
 						{recipe.title}

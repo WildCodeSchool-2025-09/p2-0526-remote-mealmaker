@@ -13,14 +13,14 @@ function CompletedRecipe({
 				className="w-48 h-48 rounded-2xl object-cover"
 			/>
 			<div>
-				<h1 className="text-2xl font-heading font-bold">Bon appétit !</h1>
-				<p className="text-lg font-bold">Tu as terminé la recette</p>
+				<h1 className="text-2xl font-heading font-bold">Enjoy your meal !</h1>
+				<p className="text-lg font-bold">You've finished the recipe</p>
 			</div>
 			<Link to={`/recipe/${id}`} className="btn btn-primary btn-xl w-full">
-				Revenir à la recette
+				Back to recipe
 			</Link>
 			<Link to="/" className="btn btn-outline btn-primary btn-xl w-full">
-				Retour à l'accueil
+				Back to Home
 			</Link>
 		</section>
 	);
