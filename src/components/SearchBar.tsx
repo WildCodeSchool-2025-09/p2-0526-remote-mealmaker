@@ -4,9 +4,7 @@ import RecipeFilters from "./RecipeFilters";
 import type { Ingredient, Filters } from "../types/recipe.types";
 import type { Dispatch, SetStateAction } from "react";
 
-type QuickIngredient = Ingredient & { label: string };
-
-const commonIngredients: QuickIngredient[] = [
+const commonIngredients = [
 	{
 		id: 1001,
 		name: "butter",
@@ -70,13 +68,14 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 			`https://api.spoonacular.com/food/ingredients/autocomplete?query=${query}&metaInformation=true&apiKey=${myApiKey}`,
 		)
 			.then((response) => response.json())
-			.then((results: AutocompleteResult[]) => {
+			.then((results) => {
 				const match = results.find(
-					(item) => item.name.toLowerCase() === query.toLowerCase(),
+					(item: AutocompleteResult) =>
+						item.name.toLowerCase() === query.toLowerCase(),
 				);
 
 				if (!match) {
-					setError("Ingrédient introuvable");
+					setError("IngrÃ©dient introuvable");
 					return;
 				}
 
@@ -90,13 +89,13 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 			});
 	}
 
-	function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+	function handleKeyDown(event: { key: string }) {
 		if (event.key === "Enter") {
 			handleSearch();
 		}
 	}
 
-	function handleQuickAdd(ingredient: QuickIngredient) {
+	function handleQuickAdd(ingredient: Ingredient) {
 		onAddIngredient({
 			id: ingredient.id,
 			name: ingredient.name,
@@ -119,7 +118,6 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
-				
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 

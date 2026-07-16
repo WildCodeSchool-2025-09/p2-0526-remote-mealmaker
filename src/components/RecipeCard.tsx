@@ -23,9 +23,7 @@ function RecipeCard({ recipe, filters }: RecipeCardProps) {
 					<div className="flex justify-between items-center py-4">
 						<div className="flex items-center gap-1">
 							<Star size={20} className="text-amber-300 fill-amber-300" />
-							<p className="text-amber-300 text-sm font-medium">
-								4.5/5
-							</p>
+							<p className="text-amber-300 text-sm font-medium">4.5/5</p>
 						</div>
 
 						<FavoriteButton recipe={recipe} />
@@ -41,7 +39,6 @@ function RecipeCard({ recipe, filters }: RecipeCardProps) {
 								{item}
 							</span>
 						))}
-
 					</div>
 					<h3 className="pb-4 font-bold text-xl sm:text-2xl ">
 						{recipe.title}

@@ -25,6 +25,19 @@ export interface RecipeStep {
 	ingredients: Ingredient[];
 }
 
+export interface RecipeCardProps {
+	recipe: Recipe;
+};
+
+export interface SearchBarProps {
+	onAddIngredient: (ingredient: Ingredient) => void;
+}
+
+export interface IngredientsListProps {
+	ingredients: Ingredient[];
+	onRemoveIngredient: (id: number) => void;
+}
+
 export interface AnalyzedInstruction {
 	steps: RecipeStep[];
 }

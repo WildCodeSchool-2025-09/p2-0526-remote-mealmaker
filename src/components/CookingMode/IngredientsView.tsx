@@ -29,7 +29,7 @@ function IngredientsView({ currentStep }: { currentStep: RecipeStep }) {
 							src={`https://img.spoonacular.com/ingredients_100x100/${ingredient.image}`}
 							alt={ingredient.name}
 							className="w-24 h-24 rounded-lg object-contain p-2 border-2 border-sage bg-base-200"
-							onError={() => handleImageError(ingredient.id)}
+							onError={() => handleImageError(ingredient.id)} 
 						/>
 					),
 				)

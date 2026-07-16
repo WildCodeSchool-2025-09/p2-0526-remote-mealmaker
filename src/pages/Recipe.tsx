@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import Navbar from "../components/NavBar";
 import Header from "../components/Header";
 
@@ -13,13 +12,6 @@ import useRecipeById from "../hooks/useRecipeById";
 function Recipe() {
 	const { id } = useParams();
 	const { recipe } = useRecipeById(id);
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (!id) {
-			navigate("/");
-		}
-	}, [id, navigate]);
 
 	if (!id) {
 		return null;
