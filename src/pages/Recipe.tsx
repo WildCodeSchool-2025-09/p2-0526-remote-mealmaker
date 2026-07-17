@@ -8,10 +8,16 @@ import CarouselRecipePage from "../components/RepicePage/CarouselRecipePage";
 import IngredientsRecipePage from "../components/RepicePage/IngredientsRecipePage";
 import StartCookingButton from "../components/RepicePage/StartCookingButton";
 import useRecipeById from "../hooks/useRecipeById";
+import { useSearch } from "../components/contexts/SearchContext";
 
 function Recipe() {
 	const { id } = useParams();
-	const { recipe } = useRecipeById(id);
+	const { recipes } = useSearch();
+	const cachedRecipe =
+		recipes.find(
+			(item) => item.id === Number(id) && item.analyzedInstructions?.length,
+		) ?? null;
+	const { recipe } = useRecipeById(Number(id), cachedRecipe);
 
 	if (!id) {
 		return null;
