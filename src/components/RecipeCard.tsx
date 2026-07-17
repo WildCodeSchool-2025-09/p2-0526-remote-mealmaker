@@ -43,10 +43,12 @@ function RecipeCard({ recipe, filters }: RecipeCardProps) {
 					<h3 className="pb-4 font-bold text-xl sm:text-2xl ">
 						{recipe.title}
 					</h3>
-					<div className="flex justify-center py-4">
-						<TimerIcon className="text-text-muted" />
-						<p className="text-text-muted">{recipe.readyInMinutes}min</p>
-					</div>
+					{recipe.readyInMinutes && (
+						<div className="flex justify-center py-4">
+							<TimerIcon className="text-text-muted" />
+							<p className="text-text-muted">{recipe.readyInMinutes}min</p>
+						</div>
+					)}
 				</article>
 			</NavLink>
 		</section>

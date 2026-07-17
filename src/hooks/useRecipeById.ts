@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import type { Recipe } from "../types/recipe.types";
 
-function useRecipeById(id: number | undefined) {
-	const [recipe, setRecipe] = useState<Recipe | null>(null);
-	const [loading, setLoading] = useState(true);
+function useRecipeById(id: number | undefined, cachedRecipe?: Recipe | null) {
+	const [recipe, setRecipe] = useState<Recipe | null>(cachedRecipe ?? null);
+	const [loading, setLoading] = useState(!cachedRecipe);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
+		if (cachedRecipe) {
+			setRecipe(cachedRecipe);
+			setLoading(false);
+			setError(null);
+			return;
+		}
+
 		setLoading(true);
 		setError(null);
 
@@ -30,7 +37,7 @@ function useRecipeById(id: number | undefined) {
 			.finally(() => {
 				setLoading(false);
 			});
-	}, [id]);
+	}, [id, cachedRecipe]);
 
 	return { recipe, loading, error };
 }

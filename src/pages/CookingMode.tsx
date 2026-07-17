@@ -8,10 +8,16 @@ import IngredientsView from "../components/CookingMode/IngredientsView";
 import StepNavigation from "../components/CookingMode/StepNavigation";
 import TimerCookModule from "../components/CookingMode/TimerCookModule";
 import CompletedRecipe from "../components/CookingMode/CompletedRecipe";
+import { useSearch } from "../components/contexts/SearchContext";
 
 function CookingMode() {
 	const { id } = useParams();
-	const { recipe } = useRecipeById(Number(id));
+	const { recipes } = useSearch();
+	const cachedRecipe =
+		recipes.find(
+			(item) => item.id === Number(id) && item.analyzedInstructions?.length,
+		) ?? null;
+	const { recipe } = useRecipeById(Number(id), cachedRecipe);
 	const [recipeCompleted, setRecipeCompleted] = useState(false);
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
 

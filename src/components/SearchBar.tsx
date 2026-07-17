@@ -1,8 +1,11 @@
 import { Search } from "lucide-react";
-import { useState } from "react";
-import RecipeFilters from "./RecipeFilters";
-import type { Ingredient, Filters } from "../types/recipe.types";
+import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
+import type { Filters, Ingredient } from "../types/recipe.types";
+import RecipeFilters from "./RecipeFilters";
+
+const MIN_QUERY_LENGTH = 3;
+const AUTOCOMPLETE_DELAY = 2000;
 
 const commonIngredients = [
 	{
@@ -58,6 +61,39 @@ type SearchBarProps = {
 function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 	const [query, setQuery] = useState("");
 	const [error, setError] = useState("");
+	const [suggestions, setSuggestions] = useState<AutocompleteResult[]>([]);
+
+	useEffect(() => {
+		if (query.trim().length < MIN_QUERY_LENGTH) {
+			setSuggestions([]);
+			return;
+		}
+
+		const myApiKey = import.meta.env.VITE_API_URL;
+
+		const debounceId = setTimeout(() => {
+			fetch(
+				`https://api.spoonacular.com/food/ingredients/autocomplete?query=${query}&metaInformation=true&apiKey=${myApiKey}`,
+			)
+				.then((response) => response.json())
+				.then((results: AutocompleteResult[]) => {
+					setSuggestions(results);
+				});
+		}, AUTOCOMPLETE_DELAY);
+
+		return () => clearTimeout(debounceId);
+	}, [query]);
+
+	function handleSelectSuggestion(suggestion: AutocompleteResult) {
+		onAddIngredient({
+			id: suggestion.id,
+			name: suggestion.name,
+			image: `https://img.spoonacular.com/ingredients_100x100/${suggestion.image}`,
+		});
+		setError("");
+		setQuery("");
+		setSuggestions([]);
+	}
 
 	function handleSearch() {
 		if (!query) return;
@@ -86,6 +122,7 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 					image: `https://img.spoonacular.com/ingredients_100x100/${match.image}`,
 				});
 				setQuery("");
+				setSuggestions([]);
 			});
 	}
 
@@ -105,7 +142,7 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 
 	return (
 		<section className="w-full flex flex-col gap-1">
-			<div className="w-full flex flex-col justify-between items-center gap-2">
+			<div className="w-full relative flex flex-col justify-between items-center gap-2">
 				<label className="input w-full bg-surface border border-solid border-primary">
 					<Search />
 					<input
@@ -118,6 +155,26 @@ function SearchBar({ onAddIngredient, filters, setFilters }: SearchBarProps) {
 						onKeyDown={handleKeyDown}
 					/>
 				</label>
+				{suggestions.length > 0 && (
+					<ul className="absolute top-full left-0 z-10 mt-1 w-full max-h-60 overflow-y-auto list-none p-0 bg-surface border border-solid border-primary rounded-box shadow-lg">
+						{suggestions.map((suggestion) => (
+							<li key={suggestion.id}>
+								<button
+									type="button"
+									className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-primary/10"
+									onClick={() => handleSelectSuggestion(suggestion)}
+								>
+									<img
+										src={`https://img.spoonacular.com/ingredients_100x100/${suggestion.image}`}
+										alt=""
+										className="size-4"
+									/>
+									{suggestion.name}
+								</button>
+							</li>
+						))}
+					</ul>
+				)}
 			</div>
 			{error && <p className="text-error text-sm pl-2">{error}</p>}
 

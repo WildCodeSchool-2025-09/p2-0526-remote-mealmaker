@@ -32,8 +32,7 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 				url += `&intolerances=${filters.intolerances.join(",")}`;
 			}
 
-			url += "&addRecipeInformation=true";
-			url += "&number=10";
+			url += "&number=5";
 
 			fetch(url)
 				.then((response) => response.json())
@@ -56,7 +55,11 @@ function GetRecipes({ selectedIngredients, filters }: GetRecipesProps) {
 			return;
 		}
 
-		fetchRecipeByIngredients(selectedIngredients);
+		const debounceId = setTimeout(() => {
+			fetchRecipeByIngredients(selectedIngredients);
+		}, 800);
+
+		return () => clearTimeout(debounceId);
 	}, [selectedIngredients, fetchRecipeByIngredients, setRecipes]);
 
 	return (
